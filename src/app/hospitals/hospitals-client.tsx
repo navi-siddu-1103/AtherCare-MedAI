@@ -3,22 +3,35 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Hospital, MapPin, Navigation, Loader2 } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Hospital, MapPin, Navigation, Loader2, Search, Tag } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { findHospitals } from '@/ai/flows/find-hospitals';
+import type { FindHospitalsOutput } from '@/ai/flows/find-hospitals';
+import { Badge } from '@/components/ui/badge';
+import { useToast } from '@/hooks/use-toast';
 
-const mockHospitals = [
-  { name: 'City General Hospital', address: '123 Health St, Metropolis', distance: '1.2 mi' },
-  { name: 'Unity Medical Center', address: '456 Wellness Ave, Metropolis', distance: '2.5 mi' },
-  { name: 'St. Jude\'s Clinic', address: '789 Care Blvd, Metropolis', distance: '3.1 mi' },
-  { name: 'County Health Services', address: '101 Healing Rd, Metropolis', distance: '4.8 mi' },
-  { name: 'Hopewell Emergency Care', address: '210 Rescue Run, Metropolis', distance: '5.2 mi'},
-  { name: 'Metropolis University Hospital', address: '555 University Dr, Metropolis', distance: '6.0 mi' },
+type Hospital = FindHospitalsOutput['hospitals'][0];
+
+const initialMockHospitals = [
+  { name: 'City General Hospital', address: '123 Health St, Metropolis', distance: '1.2 mi', services: ['Emergency', 'Cardiology', 'Pediatrics'] },
+  { name: 'Unity Medical Center', address: '456 Wellness Ave, Metropolis', distance: '2.5 mi', services: ['Surgery', 'Oncology', 'Orthopedics'] },
+  { name: 'St. Jude\'s Clinic', address: '789 Care Blvd, Metropolis', distance: '3.1 mi', services: ['Family Medicine', 'Dermatology'] },
 ];
 
 export default function HospitalsClient() {
   const [location, setLocation] = useState<{ lat: number; lon: number } | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loadingLocation, setLoadingLocation] = useState(true);
+  
+  const [hospitals, setHospitals] = useState<Hospital[]>(initialMockHospitals);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchSummary, setSearchSummary] = useState<string | null>(
+    'Displaying mock hospitals near your detected location. Use the search bar to find hospitals in a specific city.'
+  );
+
+  const { toast } = useToast();
 
   useEffect(() => {
     if ('geolocation' in navigator) {
@@ -28,73 +41,146 @@ export default function HospitalsClient() {
             lat: position.coords.latitude,
             lon: position.coords.longitude,
           });
-          setLoading(false);
+          setError(null);
+          setLoadingLocation(false);
         },
         (error) => {
-          setError(`Error getting location: ${error.message}. Showing mock data for Metropolis.`);
-          setLoading(false);
+          setError(`Error getting location: ${error.message}. Showing mock data.`);
+          setLoadingLocation(false);
         }
       );
     } else {
-      setError('Geolocation is not supported by your browser. Showing mock data for Metropolis.');
-      setLoading(false);
+      setError('Geolocation is not supported by your browser. Showing mock data.');
+      setLoadingLocation(false);
     }
   }, []);
 
+  const handleSearch = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!searchQuery.trim()) {
+      toast({
+        variant: 'destructive',
+        title: 'Empty Search Query',
+        description: 'Please enter a city name to search for hospitals.',
+      });
+      return;
+    }
+
+    setIsSearching(true);
+    setSearchSummary(null);
+    setHospitals([]);
+
+    try {
+      const result = await findHospitals({ query: `hospitals in ${searchQuery}` });
+      setHospitals(result.hospitals);
+      setSearchSummary(result.summary);
+    } catch (e) {
+      const errorMsg = e instanceof Error ? e.message : 'An unknown error occurred.';
+      setError(`Search failed: ${errorMsg}`);
+      setHospitals(initialMockHospitals);
+      setSearchSummary('Could not perform AI search. Displaying default mock data.');
+      toast({
+        variant: 'destructive',
+        title: 'AI Search Failed',
+        description: errorMsg,
+      });
+    } finally {
+      setIsSearching(false);
+    }
+  };
+
   return (
     <div className="mt-6">
-      {loading && (
-        <div className="flex items-center justify-center space-x-2 text-muted-foreground">
-          <Loader2 className="h-5 w-5 animate-spin" />
-          <span>Fetching your location...</span>
-        </div>
-      )}
+      <Card className="mb-6">
+        <CardHeader>
+          <CardTitle>Find Hospitals</CardTitle>
+          <CardDescription>Enter a city to find hospitals using our AI assistant.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSearch} className="flex items-center gap-2">
+            <Input
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="e.g., Metropolis"
+              className="flex-1"
+              disabled={isSearching}
+            />
+            <Button type="submit" disabled={isSearching || !searchQuery.trim()}>
+              {isSearching ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Searching...
+                </>
+              ) : (
+                <>
+                  <Search className="mr-2 h-4 w-4" />
+                  Search
+                </>
+              )}
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
 
-      {error && !loading && (
-        <Alert variant="default" className="mb-6">
+      {(loadingLocation || isSearching || error || searchSummary) && (
+        <Alert className="mb-6 animate-in fade-in-50">
           <MapPin className="h-4 w-4" />
-          <AlertTitle>Location Information</AlertTitle>
-          <AlertDescription>{error}</AlertDescription>
+          <AlertTitle>
+            {isSearching ? 'AI is searching...' : (error ? 'Location Error' : 'Search Information')}
+          </AlertTitle>
+          <AlertDescription>
+            {loadingLocation && 'Fetching your location...'}
+            {isSearching && `Searching for hospitals in ${searchQuery}. Please wait.`}
+            {!isSearching && error}
+            {!isSearching && !error && searchSummary}
+          </AlertDescription>
         </Alert>
       )}
 
-      {location && !loading && (
-         <Alert className="mb-6">
-           <MapPin className="h-4 w-4" />
-           <AlertTitle>Location Found!</AlertTitle>
-           <AlertDescription>
-             Displaying mock hospitals near your location. This is a demo feature.
-           </AlertDescription>
-         </Alert>
-      )}
-
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {mockHospitals.map((hospital, index) => (
-          <Card key={index} className="transition-shadow hover:shadow-md">
-            <CardHeader>
-              <div className="flex items-start justify-between">
-                <div>
-                  <CardTitle>{hospital.name}</CardTitle>
-                  <CardDescription className="mt-1 flex items-center">
-                    <MapPin className="mr-1.5 h-4 w-4" />
-                    {hospital.address}
-                  </CardDescription>
+      {hospitals.length > 0 ? (
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {hospitals.map((hospital, index) => (
+            <Card key={index} className="flex flex-col transition-shadow hover:shadow-lg animate-in fade-in-50">
+              <CardHeader>
+                <div className="flex items-start justify-between">
+                  <div>
+                    <CardTitle>{hospital.name}</CardTitle>
+                    <CardDescription className="mt-1 flex items-center pt-1">
+                      <MapPin className="mr-1.5 h-4 w-4" />
+                      {hospital.address}
+                    </CardDescription>
+                  </div>
+                  <Hospital className="h-8 w-8 text-primary/70" />
                 </div>
-                <Hospital className="h-8 w-8 text-primary/70" />
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center justify-between text-sm text-muted-foreground">
-                <span>Distance: {hospital.distance}</span>
-                <Button variant="outline" size="sm">
-                  <Navigation className="mr-2 h-4 w-4" />
-                  Directions
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+              </CardHeader>
+              <CardContent className="flex flex-grow flex-col justify-between">
+                <div>
+                  <h4 className="mb-2 text-sm font-medium flex items-center"><Tag className="mr-1.5 h-4 w-4" /> Services</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {hospital.services.map(service => (
+                      <Badge key={service} variant="secondary">{service}</Badge>
+                    ))}
+                  </div>
+                </div>
+                <div className="mt-4 flex items-center justify-between text-sm text-muted-foreground">
+                  <span>Distance: {hospital.distance}</span>
+                  <Button variant="outline" size="sm">
+                    <Navigation className="mr-2 h-4 w-4" />
+                    Directions
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      ) : (
+        !isSearching && (
+           <div className="text-center py-12 text-muted-foreground">
+              <Hospital className="mx-auto h-12 w-12" />
+              <p className="mt-4">No hospitals found for your search.</p>
+           </div>
+        )
+      )}
     </div>
   );
 }
