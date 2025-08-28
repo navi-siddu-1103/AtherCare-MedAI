@@ -71,9 +71,11 @@ export default function AppLayout({ children }: AppLayoutProps) {
           </SidebarMenu>
         </SidebarContent>
         <SidebarFooter>
-          <Button variant="outline" className="w-full justify-start">
-            <HeartPulse className="mr-2 h-4 w-4" />
-            <span className="group-data-[collapsible=icon]:hidden">Emergency</span>
+          <Button variant="outline" className="w-full justify-start" asChild>
+            <Link href="/hospitals">
+              <HeartPulse className="mr-2 h-4 w-4" />
+              <span className="group-data-[collapsible=icon]:hidden">Emergency</span>
+            </Link>
           </Button>
         </SidebarFooter>
       </Sidebar>
