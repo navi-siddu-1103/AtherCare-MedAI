@@ -37,11 +37,12 @@ const analyzeBloodReportPrompt = ai.definePrompt({
   name: 'analyzeBloodReportPrompt',
   input: { schema: AnalyzeBloodReportInputSchema },
   output: { schema: AnalyzeBloodReportOutputSchema },
-  prompt: `You are a medical expert skilled in analyzing blood reports.
+  prompt: `You are a medical expert skilled in analyzing blood reports. Provide a well-structured analysis of these CBC results with clear sections for:
+1) Results interpretation
+2) What it means for health
+3) Next steps/questions for healthcare provider
 
-  Analyze the key findings from the blood report and explain their potential implications in a way that is easy to understand for a layperson.
-
-  Make sure to be encouraging to consult with a doctor in case of doubt, and not to take this analysis as a medical opinion.
+Use proper markdown formatting and be concise but thorough. Avoid repetitive disclaimers and focus on actionable insights.
 
   Here is the blood report:
   {{{pdfText}}}`,
