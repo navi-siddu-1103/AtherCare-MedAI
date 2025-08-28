@@ -11,13 +11,18 @@ import type { FindHospitalsOutput } from '@/ai/flows/find-hospitals';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 type Hospital = FindHospitalsOutput['hospitals'][0];
 
 const initialMockHospitals: Hospital[] = [
-  { name: 'City General Hospital', address: '123 Health St, Metropolis', distance: '1.2 mi', services: ['Emergency', 'Cardiology', 'Pediatrics'], emergencyDoctorAvailability: 'Available' },
-  { name: 'Unity Medical Center', address: '456 Wellness Ave, Metropolis', distance: '2.5 mi', services: ['Surgery', 'Oncology', 'Orthopedics'], emergencyDoctorAvailability: 'On-call' },
-  { name: 'St. Jude\'s Clinic', address: '789 Care Blvd, Metropolis', distance: '3.1 mi', services: ['Family Medicine', 'Dermatology'], emergencyDoctorAvailability: 'Unavailable' },
+  { name: 'City General Hospital', address: '123 Health St, Delhi', distance: '1.2 mi', services: ['Emergency', 'Cardiology', 'Pediatrics'], emergencyDoctorAvailability: 'Available' },
+  { name: 'Unity Medical Center', address: '456 Wellness Ave, Delhi', distance: '2.5 mi', services: ['Surgery', 'Oncology', 'Orthopedics'], emergencyDoctorAvailability: 'On-call' },
+  { name: 'St. Jude\'s Clinic', address: '789 Care Blvd, Delhi', distance: '3.1 mi', services: ['Family Medicine', 'Dermatology'], emergencyDoctorAvailability: 'Unavailable' },
+];
+
+const indianCities = [
+  'Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Ahmedabad', 'Chennai', 'Kolkata', 'Pune', 'Jaipur', 'Lucknow'
 ];
 
 const availabilityInfo: Record<string, { icon: React.ElementType, color: string, label: string }> = {
@@ -35,7 +40,7 @@ export default function HospitalsClient() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const [searchSummary, setSearchSummary] = useState<string | null>(
-    'Displaying mock hospitals near your detected location. Use the search bar to find hospitals in a specific city.'
+    'Displaying mock hospitals for Delhi. Use the search to find hospitals in another city.'
   );
 
   const { toast } = useToast();
@@ -62,13 +67,13 @@ export default function HospitalsClient() {
     }
   }, []);
 
-  const handleSearch = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSearch = async (e?: React.FormEvent) => {
+    e?.preventDefault();
     if (!searchQuery.trim()) {
       toast({
         variant: 'destructive',
         title: 'Empty Search Query',
-        description: 'Please enter a city name to search for hospitals.',
+        description: 'Please enter or select a city to search for hospitals.',
       });
       return;
     }
@@ -107,24 +112,40 @@ export default function HospitalsClient() {
     );
   };
 
+  const handleCitySelect = (city: string) => {
+    setSearchQuery(city);
+  }
+
 
   return (
     <div className="mt-6">
       <Card className="mb-6">
         <CardHeader>
-          <CardTitle>Find Hospitals</CardTitle>
-          <CardDescription>Enter a city to find hospitals using our AI assistant.</CardDescription>
+          <CardTitle>Find Hospitals in India</CardTitle>
+          <CardDescription>Select a city or enter one to find hospitals using our AI assistant.</CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSearch} className="flex items-center gap-2">
+          <form onSubmit={handleSearch} className="flex flex-col gap-4 sm:flex-row">
+            <div className="flex-1 space-y-2 sm:space-y-0 sm:flex sm:gap-2">
             <Input
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="e.g., Metropolis"
+              placeholder="e.g., Delhi"
               className="flex-1"
               disabled={isSearching}
             />
-            <Button type="submit" disabled={isSearching || !searchQuery.trim()}>
+            <Select onValueChange={handleCitySelect} disabled={isSearching}>
+              <SelectTrigger className="w-full sm:w-[180px]">
+                <SelectValue placeholder="Select a city" />
+              </SelectTrigger>
+              <SelectContent>
+                {indianCities.map(city => (
+                  <SelectItem key={city} value={city}>{city}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            </div>
+            <Button type="submit" disabled={isSearching || !searchQuery.trim()} className="w-full sm:w-auto">
               {isSearching ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
