@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
@@ -19,6 +20,21 @@ type Message = {
 const initialMessages: Message[] = [
     { id: 1, text: 'Hello! I am MediAI\'s health assistant. You can ask me questions about your skin condition or blood report analysis. How can I help you today?', sender: 'bot' }
 ];
+
+const formatBotMessage = (text: string) => {
+  // Split the text by patterns like "1.", "2.", etc.
+  const points = text.split(/\d+\.\s*/).filter(Boolean);
+  if (points.length > 1) {
+    return (
+      <ul className="list-inside list-disc space-y-1">
+        {points.map((point, index) => (
+          <li key={index}>{point.trim()}</li>
+        ))}
+      </ul>
+    );
+  }
+  return <p className="text-sm">{text}</p>;
+};
 
 export default function ChatClient() {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
@@ -101,7 +117,7 @@ export default function ChatClient() {
                     : 'bg-muted'
                 )}
                 >
-                <p className="text-sm">{message.text}</p>
+                {message.sender === 'bot' ? formatBotMessage(message.text) : <p className="text-sm">{message.text}</p>}
                 </div>
                 {message.sender === 'user' && (
                 <Avatar className="h-8 w-8">
