@@ -22,7 +22,21 @@ const initialMessages: Message[] = [
 ];
 
 const formatBotMessage = (text: string) => {
-  // Split the text by patterns like "1.", "2.", etc.
+  // Check if the text already contains list tags
+  if (text.includes('<li>')) {
+    const listItems = text.match(/<li>(.*?)<\/li>/g)?.map(item => item.replace(/<\/?li>/g, ''));
+    if (listItems) {
+      return (
+        <ul className="list-inside list-disc space-y-1">
+          {listItems.map((point, index) => (
+            <li key={index}>{point.trim()}</li>
+          ))}
+        </ul>
+      );
+    }
+  }
+
+  // Fallback for numbered lists in plain text
   const points = text.split(/\d+\.\s*/).filter(Boolean);
   if (points.length > 1) {
     return (
@@ -35,6 +49,7 @@ const formatBotMessage = (text: string) => {
   }
   return <p className="text-sm">{text}</p>;
 };
+
 
 export default function ChatClient() {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
