@@ -45,12 +45,12 @@ export default function AppLayout({ children }: AppLayoutProps) {
     <SidebarProvider>
       <Sidebar>
         <SidebarHeader>
-          <div className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3">
             <Logo className="h-8 w-8 text-primary" />
             <h1 className="font-headline text-xl font-semibold group-data-[collapsible=icon]:hidden">
               MediAI
             </h1>
-          </div>
+          </Link>
         </SidebarHeader>
         <SidebarContent>
           <SidebarMenu>
@@ -72,11 +72,9 @@ export default function AppLayout({ children }: AppLayoutProps) {
         </SidebarContent>
         <SidebarFooter>
           <Link href="/hospitals" passHref>
-            <Button asChild variant="outline" className="w-full justify-start">
-              <span>
-                <HeartPulse className="mr-2 h-4 w-4" />
-                <span className="group-data-[collapsible=icon]:hidden">Emergency</span>
-              </span>
+            <Button as="a" variant="outline" className="w-full justify-start">
+              <HeartPulse className="mr-2 h-4 w-4" />
+              <span className="group-data-[collapsible=icon]:hidden">Emergency</span>
             </Button>
           </Link>
         </SidebarFooter>
