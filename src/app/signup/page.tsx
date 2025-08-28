@@ -60,9 +60,9 @@ export default function SignupPage() {
       await signup(values.email, values.password);
       toast({
         title: 'Signup Successful',
-        description: 'Your account has been created.',
+        description: 'Your account has been created. Please log in.',
       });
-      router.push('/dashboard');
+      router.push('/login');
     } catch (error) {
       toast({
         variant: 'destructive',
