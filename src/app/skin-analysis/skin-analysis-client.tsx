@@ -1,9 +1,10 @@
+
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import type { ChangeEvent } from 'react';
 import Image from 'next/image';
-import { Upload, X, Loader2, Bot } from 'lucide-react';
+import { Upload, X, Loader2, Bot, Camera, RefreshCw } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -12,6 +13,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { useToast } from '@/hooks/use-toast';
 import { analyzeSkinCondition } from '@/ai/flows/analyze-skin-condition';
 import type { AnalyzeSkinConditionOutput } from '@/ai/flows/analyze-skin-condition';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 type AnalysisState = {
   loading: boolean;
@@ -27,7 +29,52 @@ export default function SkinAnalysisClient() {
     error: null,
     result: null,
   });
+  const [activeTab, setActiveTab] = useState('upload');
+  const [hasCameraPermission, setHasCameraPermission] = useState<boolean | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const { toast } = useToast();
+
+  const getCameraPermission = useCallback(async () => {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      setHasCameraPermission(false);
+      toast({
+        variant: 'destructive',
+        title: 'Camera Not Supported',
+        description: 'Your browser does not support camera access.',
+      });
+      return;
+    }
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+      }
+      setHasCameraPermission(true);
+    } catch (error) {
+      console.error('Error accessing camera:', error);
+      setHasCameraPermission(false);
+      toast({
+        variant: 'destructive',
+        title: 'Camera Access Denied',
+        description: 'Please enable camera permissions in your browser settings.',
+      });
+    }
+  }, [toast]);
+
+  useEffect(() => {
+    if (activeTab === 'camera') {
+      getCameraPermission();
+    } else {
+      // Stop camera stream when switching away
+      if (videoRef.current && videoRef.current.srcObject) {
+        const stream = videoRef.current.srcObject as MediaStream;
+        stream.getTracks().forEach(track => track.stop());
+        videoRef.current.srcObject = null;
+        setHasCameraPermission(null);
+      }
+    }
+  }, [activeTab, getCameraPermission]);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
@@ -38,28 +85,62 @@ export default function SkinAnalysisClient() {
     }
   };
 
+  const handleCapture = () => {
+    if (videoRef.current && canvasRef.current) {
+      const video = videoRef.current;
+      const canvas = canvasRef.current;
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      const context = canvas.getContext('2d');
+      if (context) {
+        context.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+        const dataUrl = canvas.toDataURL('image/jpeg');
+        setPreviewUrl(dataUrl);
+        fetch(dataUrl)
+          .then(res => res.blob())
+          .then(blob => {
+            const capturedFile = new File([blob], 'capture.jpg', { type: 'image/jpeg' });
+            setFile(capturedFile);
+          });
+      }
+    }
+  };
+
   const resetState = () => {
     setFile(null);
     setPreviewUrl(null);
     setAnalysis({ loading: false, error: null, result: null });
+    if (activeTab === 'camera') {
+      getCameraPermission();
+    }
   };
 
   const handleAnalysis = async () => {
-    if (!file) {
+    const source = file || previewUrl;
+    if (!source) {
       toast({
         variant: 'destructive',
-        title: 'No file selected',
-        description: 'Please select an image file to analyze.',
+        title: 'No image selected',
+        description: 'Please upload or capture an image to analyze.',
       });
       return;
     }
-
+  
     setAnalysis({ loading: true, error: null, result: null });
-
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = async () => {
-      const photoDataUri = reader.result as string;
+  
+    const processAndAnalyze = async (data: string | File) => {
+      let photoDataUri: string;
+      if (typeof data === 'string') {
+        photoDataUri = data;
+      } else {
+        photoDataUri = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(data);
+          reader.onload = () => resolve(reader.result as string);
+          reader.onerror = (error) => reject(error);
+        });
+      }
+  
       try {
         const result = await analyzeSkinCondition({ photoDataUri });
         setAnalysis({ loading: false, error: null, result });
@@ -73,10 +154,10 @@ export default function SkinAnalysisClient() {
         });
       }
     };
-    reader.onerror = () => {
-      setAnalysis({ loading: false, error: 'Failed to read the file.', result: null });
-    };
+  
+    await processAndAnalyze(source);
   };
+  
 
   const getConfidenceColor = (level: string) => {
     switch (level.toLowerCase()) {
@@ -95,49 +176,100 @@ export default function SkinAnalysisClient() {
     <div className="mt-6 grid gap-8 lg:grid-cols-2">
       <Card>
         <CardHeader>
-          <CardTitle>Upload Skin Image</CardTitle>
+          <CardTitle>Provide Skin Image</CardTitle>
           <CardDescription>
-            Choose a clear, well-lit image of the affected skin area.
+            Upload a file or use your camera. Choose a clear, well-lit image of the affected area.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
-          {!previewUrl ? (
-            <label
-              htmlFor="skin-image-upload"
-              className="flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-border bg-card p-12 text-center text-muted-foreground transition-colors hover:border-primary hover:bg-accent/20"
-            >
-              <Upload className="h-10 w-10" />
-              <span className="mt-4 font-medium">Click to upload or drag and drop</span>
-              <span className="mt-1 text-sm">PNG, JPG, or WEBP</span>
-              <input
-                id="skin-image-upload"
-                type="file"
-                accept="image/png, image/jpeg, image/webp"
-                className="sr-only"
-                onChange={handleFileChange}
-              />
-            </label>
-          ) : (
-            <div className="relative">
-              <Image
-                src={previewUrl}
-                alt="Skin preview"
-                width={500}
-                height={300}
-                className="w-full rounded-lg object-cover"
-              />
-              <Button
-                variant="destructive"
-                size="icon"
-                className="absolute right-2 top-2 h-8 w-8 rounded-full"
-                onClick={resetState}
-              >
-                <X className="h-4 w-4" />
-              </Button>
-            </div>
-          )}
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="upload">
+                <Upload className="mr-2 h-4 w-4" /> Upload
+              </TabsTrigger>
+              <TabsTrigger value="camera">
+                <Camera className="mr-2 h-4 w-4" /> Camera
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value="upload" className="mt-6">
+              {!previewUrl ? (
+                <label
+                  htmlFor="skin-image-upload"
+                  className="flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-border bg-card p-12 text-center text-muted-foreground transition-colors hover:border-primary hover:bg-accent/20"
+                >
+                  <Upload className="h-10 w-10" />
+                  <span className="mt-4 font-medium">Click to upload or drag and drop</span>
+                  <span className="mt-1 text-sm">PNG, JPG, or WEBP</span>
+                  <input
+                    id="skin-image-upload"
+                    type="file"
+                    accept="image/png, image/jpeg, image/webp"
+                    className="sr-only"
+                    onChange={handleFileChange}
+                    disabled={analysis.loading}
+                  />
+                </label>
+              ) : (
+                <div className="relative">
+                  <Image
+                    src={previewUrl}
+                    alt="Skin preview"
+                    width={500}
+                    height={300}
+                    className="w-full rounded-lg object-cover"
+                  />
+                  <Button
+                    variant="destructive"
+                    size="icon"
+                    className="absolute right-2 top-2 h-8 w-8 rounded-full"
+                    onClick={resetState}
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                </div>
+              )}
+            </TabsContent>
+            <TabsContent value="camera" className="mt-6">
+              {!previewUrl ? (
+                <div className="space-y-4">
+                  <div className="relative aspect-video w-full overflow-hidden rounded-lg border bg-muted">
+                    <video ref={videoRef} className="h-full w-full object-cover" autoPlay muted playsInline />
+                    <canvas ref={canvasRef} className="hidden" />
+                    {hasCameraPermission === false && (
+                      <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 text-white">
+                        <Camera className="h-12 w-12" />
+                        <p className="mt-2 text-center">Camera access denied or not available.</p>
+                      </div>
+                    )}
+                  </div>
+                  <Button onClick={handleCapture} disabled={!hasCameraPermission || analysis.loading} className="w-full">
+                    <Camera className="mr-2 h-4 w-4" />
+                    Capture Image
+                  </Button>
+                </div>
+              ) : (
+                <div className="relative">
+                  <Image
+                    src={previewUrl}
+                    alt="Captured skin"
+                    width={500}
+                    height={300}
+                    className="w-full rounded-lg object-cover"
+                  />
+                   <Button
+                    variant="ghost"
+                    size="icon"
+                    className="absolute right-2 top-2 h-8 w-8 rounded-full bg-black/50 text-white hover:bg-black/70 hover:text-white"
+                    onClick={resetState}
+                  >
+                    <RefreshCw className="h-4 w-4" />
+                  </Button>
+                </div>
+              )}
+            </TabsContent>
+          </Tabs>
 
-          <Button onClick={handleAnalysis} disabled={!file || analysis.loading} className="w-full">
+          <Button onClick={handleAnalysis} disabled={!previewUrl || analysis.loading} className="w-full">
             {analysis.loading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
