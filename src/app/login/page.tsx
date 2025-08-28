@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
@@ -28,6 +28,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/contexts/auth-context';
 import Logo from '@/components/logo';
 import { Loader2 } from 'lucide-react';
+import SplashScreen from '@/components/layout/splash-screen';
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Invalid email address.' }),
@@ -36,9 +37,9 @@ const formSchema = z.object({
 
 export default function LoginPage() {
   const router = useRouter();
-  const { login } = useAuth();
+  const { login, user, loading } = useAuth();
   const { toast } = useToast();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -48,24 +49,34 @@ export default function LoginPage() {
     },
   });
 
+  useEffect(() => {
+    if (!loading && user) {
+      router.push('/dashboard');
+    }
+  }, [user, loading, router]);
+
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsLoading(true);
+    setIsSubmitting(true);
     try {
       await login(values.email, values.password);
       toast({
         title: 'Login Successful',
         description: "Welcome back!",
       });
-      router.push('/dashboard');
+      // The useEffect hook will handle redirection
     } catch (error) {
       toast({
         variant: 'destructive',
         title: 'Login Failed',
         description: error instanceof Error ? error.message : 'An unknown error occurred.',
       });
-    } finally {
-      setIsLoading(false);
+      setIsSubmitting(false);
     }
+  }
+
+  if (loading || (!loading && user)) {
+    return <SplashScreen />;
   }
 
   return (
@@ -110,8 +121,8 @@ export default function LoginPage() {
                     </FormItem>
                   )}
                 />
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : 'Login'}
+                <Button type="submit" className="w-full" disabled={isSubmitting}>
+                  {isSubmitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : 'Login'}
                 </Button>
               </form>
             </Form>

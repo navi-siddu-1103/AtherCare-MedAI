@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
@@ -28,6 +28,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/contexts/auth-context';
 import Logo from '@/components/logo';
 import { Loader2 } from 'lucide-react';
+import SplashScreen from '@/components/layout/splash-screen';
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Invalid email address.' }),
@@ -40,9 +41,9 @@ const formSchema = z.object({
 
 export default function SignupPage() {
   const router = useRouter();
-  const { signup } = useAuth();
+  const { signup, user, loading } = useAuth();
   const { toast } = useToast();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -53,24 +54,34 @@ export default function SignupPage() {
     },
   });
 
+  useEffect(() => {
+    if (!loading && user) {
+      router.push('/dashboard');
+    }
+  }, [user, loading, router]);
+
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsLoading(true);
+    setIsSubmitting(true);
     try {
       await signup(values.email, values.password);
       toast({
         title: 'Signup Successful',
         description: 'Your account has been created.',
       });
-      router.push('/dashboard');
+      // The useEffect hook will handle redirection
     } catch (error) {
       toast({
         variant: 'destructive',
         title: 'Signup Failed',
         description: error instanceof Error ? error.message : 'An unknown error occurred.',
       });
-    } finally {
-      setIsLoading(false);
+      setIsSubmitting(false);
     }
+  }
+
+  if (loading || (!loading && user)) {
+    return <SplashScreen />;
   }
 
   return (
@@ -128,8 +139,8 @@ export default function SignupPage() {
                     </FormItem>
                   )}
                 />
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : 'Create Account'}
+                <Button type="submit" className="w-full" disabled={isSubmitting}>
+                  {isSubmitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : 'Create Account'}
                 </Button>
               </form>
             </Form>

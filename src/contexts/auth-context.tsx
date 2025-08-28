@@ -35,13 +35,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (loading) return;
 
     const isAuthPage = pathname === '/login' || pathname === '/signup';
-    const isProtectedRoute = !isAuthPage;
 
-    if (!user && isProtectedRoute) {
+    // If the user is not logged in and is trying to access a protected page,
+    // redirect them to the login page.
+    if (!user && !isAuthPage) {
       router.push('/login');
     }
-    // Redirection for logged-in users on auth pages is now handled on the pages themselves.
-    // This prevents layout shifts and race conditions.
     
   }, [user, loading, pathname, router]);
 
@@ -58,6 +57,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     signup,
     logout: handleLogout,
   };
+
+  // While the initial user state is loading, we don't render anything.
+  // This prevents a flash of the login page for already authenticated users.
+  if (loading) {
+    return null;
+  }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

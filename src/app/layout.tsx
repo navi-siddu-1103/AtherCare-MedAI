@@ -1,7 +1,6 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
 import type { Metadata } from 'next';
 import AppLayout from '@/components/layout/app-layout';
 import SplashScreen from '@/components/layout/splash-screen';
@@ -20,22 +19,12 @@ export const metadata: Metadata = {
 */
 
 function AppContent({ children }: { children: React.ReactNode }) {
-  const { user, loading: authLoading } = useAuth();
+  const { user, loading } = useAuth();
   const pathname = usePathname();
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // This timer is for the splash screen cosmetic effect.
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1500);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   const isAuthPage = pathname === '/login' || pathname === '/signup';
 
-  if (loading || authLoading) {
+  if (loading) {
     return <SplashScreen />;
   }
 
