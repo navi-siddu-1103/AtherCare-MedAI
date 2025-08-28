@@ -35,18 +35,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (loading) return;
 
     const isAuthPage = pathname === '/login' || pathname === '/signup';
-    const isProtectedRoute = !isAuthPage && pathname !== '/';
+    const isProtectedRoute = !isAuthPage;
 
-    if (user && isAuthPage) {
-      router.push('/dashboard');
-    } else if (!user && isProtectedRoute) {
+    if (!user && isProtectedRoute) {
       router.push('/login');
     }
+    // Redirection for logged-in users on auth pages is now handled on the pages themselves.
+    // This prevents layout shifts and race conditions.
+    
   }, [user, loading, pathname, router]);
 
   const handleLogout = async () => {
     await logout();
-    setUser(null);
+    // Setting user to null is handled by onAuthStateChanged
     router.push('/login');
   };
 
