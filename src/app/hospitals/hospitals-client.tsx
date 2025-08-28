@@ -4,20 +4,27 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Hospital, MapPin, Navigation, Loader2, Search, Tag } from 'lucide-react';
+import { Hospital, MapPin, Navigation, Loader2, Search, Tag, UserCheck, UserX, Clock } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { findHospitals } from '@/ai/flows/find-hospitals';
 import type { FindHospitalsOutput } from '@/ai/flows/find-hospitals';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
+import { cn } from '@/lib/utils';
 
 type Hospital = FindHospitalsOutput['hospitals'][0];
 
-const initialMockHospitals = [
-  { name: 'City General Hospital', address: '123 Health St, Metropolis', distance: '1.2 mi', services: ['Emergency', 'Cardiology', 'Pediatrics'] },
-  { name: 'Unity Medical Center', address: '456 Wellness Ave, Metropolis', distance: '2.5 mi', services: ['Surgery', 'Oncology', 'Orthopedics'] },
-  { name: 'St. Jude\'s Clinic', address: '789 Care Blvd, Metropolis', distance: '3.1 mi', services: ['Family Medicine', 'Dermatology'] },
+const initialMockHospitals: Hospital[] = [
+  { name: 'City General Hospital', address: '123 Health St, Metropolis', distance: '1.2 mi', services: ['Emergency', 'Cardiology', 'Pediatrics'], emergencyDoctorAvailability: 'Available' },
+  { name: 'Unity Medical Center', address: '456 Wellness Ave, Metropolis', distance: '2.5 mi', services: ['Surgery', 'Oncology', 'Orthopedics'], emergencyDoctorAvailability: 'On-call' },
+  { name: 'St. Jude\'s Clinic', address: '789 Care Blvd, Metropolis', distance: '3.1 mi', services: ['Family Medicine', 'Dermatology'], emergencyDoctorAvailability: 'Unavailable' },
 ];
+
+const availabilityInfo: Record<string, { icon: React.ElementType, color: string, label: string }> = {
+    'Available': { icon: UserCheck, color: 'text-green-600', label: 'Available' },
+    'On-call': { icon: Clock, color: 'text-yellow-600', label: 'On-call' },
+    'Unavailable': { icon: UserX, color: 'text-red-600', label: 'Unavailable' },
+  };
 
 export default function HospitalsClient() {
   const [location, setLocation] = useState<{ lat: number; lon: number } | null>(null);
@@ -89,6 +96,18 @@ export default function HospitalsClient() {
     }
   };
 
+  const renderAvailability = (availability: string) => {
+    const info = availabilityInfo[availability] || { icon: Clock, color: 'text-muted-foreground', label: 'Unknown' };
+    const Icon = info.icon;
+    return (
+      <div className={cn('flex items-center text-sm font-semibold', info.color)}>
+        <Icon className="mr-1.5 h-4 w-4" />
+        <span>{info.label}</span>
+      </div>
+    );
+  };
+
+
   return (
     <div className="mt-6">
       <Card className="mb-6">
@@ -155,6 +174,10 @@ export default function HospitalsClient() {
               </CardHeader>
               <CardContent className="flex flex-grow flex-col justify-between">
                 <div>
+                   <div className="mb-4">
+                    <h4 className="mb-2 text-sm font-medium">Emergency Doctor Status</h4>
+                    {renderAvailability(hospital.emergencyDoctorAvailability)}
+                  </div>
                   <h4 className="mb-2 text-sm font-medium flex items-center"><Tag className="mr-1.5 h-4 w-4" /> Services</h4>
                   <div className="flex flex-wrap gap-2">
                     {hospital.services.map(service => (

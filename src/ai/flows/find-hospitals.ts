@@ -13,12 +13,12 @@ import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
 const mockHospitals = [
-    { name: 'City General Hospital', address: '123 Health St, Metropolis', distance: '1.2 mi', services: ['Emergency', 'Cardiology', 'Pediatrics'] },
-    { name: 'Unity Medical Center', address: '456 Wellness Ave, Metropolis', distance: '2.5 mi', services: ['Surgery', 'Oncology', 'Orthopedics'] },
-    { name: 'St. Jude\'s Clinic', address: '789 Care Blvd, Metropolis', distance: '3.1 mi', services: ['Family Medicine', 'Dermatology', 'Radiology'] },
-    { name: 'County Health Services', address: '101 Healing Rd, Metropolis', distance: '4.8 mi', services: ['Emergency', 'General Surgery', 'Neurology'] },
-    { name: 'Hopewell Emergency Care', address: '210 Rescue Run, Metropolis', distance: '5.2 mi', services: ['Emergency', 'Urgent Care'] },
-    { name: 'Metropolis University Hospital', address: '555 University Dr, Metropolis', distance: '6.0 mi', services: ['Trauma Center', 'Research', 'Specialty Care'] },
+    { name: 'City General Hospital', address: '123 Health St, Metropolis', distance: '1.2 mi', services: ['Emergency', 'Cardiology', 'Pediatrics'], emergencyDoctorAvailability: 'Available' },
+    { name: 'Unity Medical Center', address: '456 Wellness Ave, Metropolis', distance: '2.5 mi', services: ['Surgery', 'Oncology', 'Orthopedics'], emergencyDoctorAvailability: 'On-call' },
+    { name: 'St. Jude\'s Clinic', address: '789 Care Blvd, Metropolis', distance: '3.1 mi', services: ['Family Medicine', 'Dermatology', 'Radiology'], emergencyDoctorAvailability: 'Unavailable' },
+    { name: 'County Health Services', address: '101 Healing Rd, Metropolis', distance: '4.8 mi', services: ['Emergency', 'General Surgery', 'Neurology'], emergencyDoctorAvailability: 'Available' },
+    { name: 'Hopewell Emergency Care', address: '210 Rescue Run, Metropolis', distance: '5.2 mi', services: ['Emergency', 'Urgent Care'], emergencyDoctorAvailability: 'Available' },
+    { name: 'Metropolis University Hospital', address: '555 University Dr, Metropolis', distance: '6.0 mi', services: ['Trauma Center', 'Research', 'Specialty Care'], emergencyDoctorAvailability: 'On-call' },
 ];
 
 const findHospitalsTool = ai.defineTool(
@@ -33,6 +33,7 @@ const findHospitalsTool = ai.defineTool(
         address: z.string(),
         distance: z.string(),
         services: z.array(z.string()),
+        emergencyDoctorAvailability: z.string().describe("Current availability of doctors for emergencies. Can be 'Available', 'On-call', or 'Unavailable'."),
       })),
     },
     async (input) => {
@@ -55,6 +56,7 @@ const FindHospitalsOutputSchema = z.object({
     address: z.string(),
     distance: z.string(),
     services: z.array(z.string()),
+    emergencyDoctorAvailability: z.string().describe("Current availability of doctors for emergencies. Can be 'Available', 'On-call', or 'Unavailable'."),
   })).describe("The list of hospitals found."),
 });
 export type FindHospitalsOutput = z.infer<typeof FindHospitalsOutputSchema>;
