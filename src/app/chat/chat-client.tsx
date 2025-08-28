@@ -7,6 +7,8 @@ import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Send, Bot, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { chat } from '@/ai/flows/chat';
+import { useToast } from '@/hooks/use-toast';
 
 type Message = {
   id: number;
@@ -23,6 +25,7 @@ export default function ChatClient() {
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const { toast } = useToast();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -32,7 +35,7 @@ export default function ChatClient() {
     scrollToBottom();
   }, [messages, isLoading]);
   
-  const handleSendMessage = (e: React.FormEvent) => {
+  const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputValue.trim()) return;
 
@@ -43,19 +46,34 @@ export default function ChatClient() {
     };
 
     setMessages((prev) => [...prev, userMessage]);
+    const currentInputValue = inputValue;
     setInputValue('');
     setIsLoading(true);
 
-    // Mock bot response
-    setTimeout(() => {
-        const botResponse: Message = {
-            id: Date.now() + 1,
-            text: "Thank you for your question. The AI chatbot is currently in a demonstration phase. For specific medical advice, please consult with a qualified healthcare professional.",
-            sender: 'bot',
-          };
+    try {
+      const result = await chat({ message: currentInputValue });
+      const botResponse: Message = {
+        id: Date.now() + 1,
+        text: result.response,
+        sender: 'bot',
+      };
       setMessages((prev) => [...prev, botResponse]);
+    } catch (e) {
+      const errorMsg = e instanceof Error ? e.message : 'An unknown error occurred.';
+      toast({
+        variant: 'destructive',
+        title: 'Chatbot Error',
+        description: 'Failed to get a response from the AI. Please try again.',
+      });
+       const errorResponse: Message = {
+        id: Date.now() + 1,
+        text: "Sorry, I'm having trouble connecting right now. Please try again in a moment.",
+        sender: 'bot',
+      };
+      setMessages((prev) => [...prev, errorResponse]);
+    } finally {
       setIsLoading(false);
-    }, 1500);
+    }
   };
 
   return (
