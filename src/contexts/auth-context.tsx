@@ -26,18 +26,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const unsubscribe = onAuthStateChanged((user) => {
       setUser(user);
       setLoading(false);
-      
-      const isAuthPage = pathname === '/login' || pathname === '/signup';
-
-      if (user && isAuthPage) {
-        router.push('/dashboard');
-      } else if (!user && !isAuthPage && pathname !== '/') {
-        router.push('/login');
-      }
     });
 
     return () => unsubscribe();
-  }, [router]);
+  }, []);
+
+  useEffect(() => {
+    if (loading) return;
+
+    const isAuthPage = pathname === '/login' || pathname === '/signup';
+    const isProtectedRoute = !isAuthPage && pathname !== '/';
+
+    if (user && isAuthPage) {
+      router.push('/dashboard');
+    } else if (!user && isProtectedRoute) {
+      router.push('/login');
+    }
+  }, [user, loading, pathname, router]);
 
   const handleLogout = async () => {
     await logout();
