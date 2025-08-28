@@ -5,33 +5,32 @@
 export interface User {
     uid: string;
     email: string | null;
+    displayName: string | null;
 }
 
 let currentUser: User | null = null;
 const listeners: ((user: User | null) => void)[] = [];
 
 // Mock user database
-const users: Record<string, string> = {
-    'user@example.com': 'password123'
+const users: Record<string, { password: string; displayName: string; }> = {
+    'user@example.com': { password: 'password123', displayName: 'Demo User' }
 };
 
 function notifyListeners() {
   listeners.forEach(listener => listener(currentUser));
 }
 
-export async function signup(email: string, password: string): Promise<User> {
+export async function signup(email: string, password: string, name: string): Promise<User> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (users[email]) {
         reject(new Error('An account with this email already exists.'));
         return;
       }
-      users[email] = password;
+      users[email] = { password, displayName: name };
       // We create the user, but we don't set currentUser here.
       // This forces the user to log in after signing up.
-      const newUser: User = { uid: Date.now().toString(), email: email };
-      // currentUser = newUser; // This line is removed
-      // notifyListeners(); // This line is removed
+      const newUser: User = { uid: Date.now().toString(), email: email, displayName: name };
       resolve(newUser);
     }, 1000);
   });
@@ -40,8 +39,9 @@ export async function signup(email: string, password: string): Promise<User> {
 export async function login(email: string, password: string): Promise<User> {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            if (users[email] && users[email] === password) {
-                const user: User = { uid: 'mock-uid-' + email, email: email };
+            const userData = users[email];
+            if (userData && userData.password === password) {
+                const user: User = { uid: 'mock-uid-' + email, email: email, displayName: userData.displayName };
                 currentUser = user;
                 notifyListeners();
                 resolve(user);

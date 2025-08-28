@@ -49,7 +49,7 @@ export default function DashboardPage() {
       <section className="relative overflow-hidden rounded-lg bg-primary/10 p-8 shadow-sm">
         <div className="relative z-10">
           <h1 className="font-headline text-3xl font-bold text-primary-foreground md:text-4xl">
-            Welcome, {user?.email || 'User'}!
+            Welcome, {user?.displayName || 'User'}!
           </h1>
           <p className="mt-2 max-w-2xl text-primary-foreground/80">
             Your personal AI health assistant for diagnostics, reports, and guidance. Get started by exploring one of our features below.
