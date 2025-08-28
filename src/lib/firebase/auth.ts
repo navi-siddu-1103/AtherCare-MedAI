@@ -27,9 +27,11 @@ export async function signup(email: string, password: string): Promise<User> {
         return;
       }
       users[email] = password;
+      // We create the user, but we don't set currentUser here.
+      // This forces the user to log in after signing up.
       const newUser: User = { uid: Date.now().toString(), email: email };
-      currentUser = newUser;
-      notifyListeners();
+      // currentUser = newUser; // This line is removed
+      // notifyListeners(); // This line is removed
       resolve(newUser);
     }, 1000);
   });
