@@ -55,6 +55,7 @@ export default function SignupPage() {
   });
 
   useEffect(() => {
+    // This effect handles the case where a user is already logged in and navigates to the signup page.
     if (!loading && user) {
       router.push('/dashboard');
     }
@@ -69,7 +70,7 @@ export default function SignupPage() {
         title: 'Signup Successful',
         description: 'Your account has been created.',
       });
-      // The useEffect hook will handle redirection
+      router.push('/dashboard'); // Manually redirect after successful signup
     } catch (error) {
       toast({
         variant: 'destructive',
@@ -80,6 +81,7 @@ export default function SignupPage() {
     }
   }
 
+  // If auth is loading, or the user is already logged in, show a splash screen to prevent flicker.
   if (loading || (!loading && user)) {
     return <SplashScreen />;
   }
