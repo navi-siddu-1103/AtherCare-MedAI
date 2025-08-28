@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -24,9 +25,10 @@ function AppContent({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // This timer is for the splash screen cosmetic effect.
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2000); // Show splash screen for 2 seconds
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -37,6 +39,8 @@ function AppContent({ children }: { children: React.ReactNode }) {
     return <SplashScreen />;
   }
 
+  // If we have a user and we are not on an auth page, show the main app layout.
+  // Otherwise, show the children directly (which will be the login/signup pages).
   return (
     <>
       {user && !isAuthPage ? <AppLayout>{children}</AppLayout> : children}
