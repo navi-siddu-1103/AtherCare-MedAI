@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
@@ -49,13 +49,6 @@ export default function LoginPage() {
     },
   });
 
-  useEffect(() => {
-    if (!loading && user) {
-      router.push('/dashboard');
-    }
-  }, [user, loading, router]);
-
-
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     try {
@@ -64,7 +57,7 @@ export default function LoginPage() {
         title: 'Login Successful',
         description: "Welcome back!",
       });
-      // The useEffect hook will handle redirection
+      // Redirection is now handled by the AuthProvider's useEffect hook
     } catch (error) {
       toast({
         variant: 'destructive',
@@ -75,7 +68,8 @@ export default function LoginPage() {
     }
   }
 
-  if (loading || (!loading && user)) {
+  // Show splash screen while loading or if a user is already logged in (before redirection).
+  if (loading || user) {
     return <SplashScreen />;
   }
 

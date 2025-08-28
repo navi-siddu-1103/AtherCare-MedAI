@@ -1,9 +1,8 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -40,7 +39,6 @@ const formSchema = z.object({
 });
 
 export default function SignupPage() {
-  const router = useRouter();
   const { signup, user, loading } = useAuth();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -54,14 +52,6 @@ export default function SignupPage() {
     },
   });
 
-  useEffect(() => {
-    // This effect handles the case where a user is already logged in and navigates to the signup page.
-    if (!loading && user) {
-      router.push('/dashboard');
-    }
-  }, [user, loading, router]);
-
-
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     try {
@@ -70,7 +60,7 @@ export default function SignupPage() {
         title: 'Signup Successful',
         description: 'Your account has been created.',
       });
-      router.push('/dashboard'); // Manually redirect after successful signup
+      // Redirection is now handled by the AuthProvider's useEffect hook
     } catch (error) {
       toast({
         variant: 'destructive',
@@ -82,7 +72,7 @@ export default function SignupPage() {
   }
 
   // If auth is loading, or the user is already logged in, show a splash screen to prevent flicker.
-  if (loading || (!loading && user)) {
+  if (loading || user) {
     return <SplashScreen />;
   }
 
