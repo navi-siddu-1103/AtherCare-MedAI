@@ -80,7 +80,7 @@ export default function BloodReportClient() {
   };
 
   return (
-    <div className="mt-6 grid gap-8 lg:grid-cols-2">
+    <div className="mt-6 grid gap-8 lg:grid-cols-2 lg:max-w-4xl w-full">
       <Card>
         <CardHeader>
           <CardTitle>Upload Blood Report</CardTitle>
