@@ -18,6 +18,7 @@ const AnalyzeBloodReportInputSchema = z.object({
     .describe(
       "A blood report PDF, as a data URI that must include a MIME type and use Base64 encoding. Expected format: 'data:<mimetype>;base64,<encoded_data>'."
     ),
+    pdfText: z.string().optional(),
 });
 export type AnalyzeBloodReportInput = z.infer<typeof AnalyzeBloodReportInputSchema>;
 
@@ -43,7 +44,7 @@ const analyzeBloodReportPrompt = ai.definePrompt({
   Make sure to be encouraging to consult with a doctor in case of doubt, and not to take this analysis as a medical opinion.
 
   Here is the blood report:
-  {{pdfText}}`,
+  {{{pdfText}}}`,
 });
 
 const analyzeBloodReportFlow = ai.defineFlow(
