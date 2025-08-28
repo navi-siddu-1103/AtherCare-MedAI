@@ -3,6 +3,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -39,6 +40,7 @@ const formSchema = z.object({
 });
 
 export default function SignupPage() {
+  const router = useRouter();
   const { signup, user, loading } = useAuth();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -60,7 +62,7 @@ export default function SignupPage() {
         title: 'Signup Successful',
         description: 'Your account has been created.',
       });
-      // Redirection is now handled by the AuthProvider's useEffect hook
+      router.push('/dashboard');
     } catch (error) {
       toast({
         variant: 'destructive',
