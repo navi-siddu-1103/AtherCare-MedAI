@@ -1,6 +1,8 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -116,6 +118,15 @@ export default function HospitalsClient() {
     setSearchQuery(city);
   }
 
+  const getDirectionsUrl = (hospitalAddress: string) => {
+    const destination = encodeURIComponent(hospitalAddress);
+    if (location) {
+      const origin = `${location.lat},${location.lon}`;
+      return `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}`;
+    }
+    return `https://www.google.com/maps/dir/?api=1&destination=${destination}`;
+  };
+
 
   return (
     <div className="mt-6">
@@ -208,9 +219,11 @@ export default function HospitalsClient() {
                 </div>
                 <div className="mt-4 flex items-center justify-between text-sm text-muted-foreground">
                   <span>Distance: {hospital.distance}</span>
-                  <Button variant="outline" size="sm">
-                    <Navigation className="mr-2 h-4 w-4" />
-                    Directions
+                  <Button asChild variant="outline" size="sm">
+                    <Link href={getDirectionsUrl(hospital.address)} target="_blank" rel="noopener noreferrer">
+                      <Navigation className="mr-2 h-4 w-4" />
+                      Directions
+                    </Link>
                   </Button>
                 </div>
               </CardContent>
