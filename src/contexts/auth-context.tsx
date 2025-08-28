@@ -37,7 +37,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
 
     return () => unsubscribe();
-  }, [router, pathname]);
+  }, [router]);
 
   const handleLogout = async () => {
     await logout();
