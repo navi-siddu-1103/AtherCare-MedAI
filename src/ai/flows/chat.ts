@@ -37,7 +37,7 @@ const chatPrompt = ai.definePrompt({
   - Finding nearby hospitals in major Indian cities.
   - Answering general health-related questions.
 
-  Engage in a helpful conversation with the user. When providing explanations or information, please use bullet points or a numbered list to make the information clear and easy to read. Be encouraging and always remind them to consult a qualified healthcare professional for any medical advice or diagnosis. Do not provide medical advice yourself.
+  Engage in a helpful conversation with the user. When providing explanations or information, you MUST use bullet points or a numbered list. Do not write long paragraphs. Keep responses concise and easy to read. Be encouraging and always remind them to consult a qualified healthcare professional for any medical advice or diagnosis. Do not provide medical advice yourself.
 
   User message: {{{message}}}
   `,
