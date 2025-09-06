@@ -1,3 +1,4 @@
+
 'use server';
 
 /**
@@ -25,7 +26,7 @@ export type AnalyzeBloodReportInput = z.infer<typeof AnalyzeBloodReportInputSche
 const AnalyzeBloodReportOutputSchema = z.object({
   analysisResult: z
     .string()
-    .describe("A structured, AI-powered analysis summarizing key findings, health implications, and next steps. Formatted with headings starting with '##' and bullet points with '*'. Example: '## Section Title\\n* Point 1\\n* Point 2'"),
+    .describe("A structured, AI-powered analysis summarizing key findings, health implications, and next steps. Each section is a heading followed by bullet points starting with '*'. Example: 'Results Interpretation\\n* Point 1\\n* Point 2'"),
 });
 export type AnalyzeBloodReportOutput = z.infer<typeof AnalyzeBloodReportOutputSchema>;
 
@@ -40,16 +41,12 @@ const analyzeBloodReportPrompt = ai.definePrompt({
   prompt: `You are a medical expert skilled in analyzing blood reports. Provide a well-structured analysis of these CBC results with clear sections.
 
   **CRITICAL INSTRUCTIONS:**
-  1.  Use '##' for main headings (e.g., "## Results Interpretation").
-  2.  Use '*' for bullet points under each heading.
-  3.  DO NOT use any other markdown (like '###' or bolding with '**').
-  4.  Keep the language simple and easy to understand.
-  5.  Be concise.
-
-  Provide sections for:
-  - Results Interpretation
-  - What It Means for Health
-  - Next Steps/Questions for Provider
+  1.  Provide three distinct sections with these exact headings: "Results Interpretation", "What It Means for Health", and "Next Steps/Questions for Provider".
+  2.  Each heading must be on its own line.
+  3.  Under each heading, provide a list of bullet points starting with '*'.
+  4.  DO NOT use any other markdown (like '##' or bolding with '**').
+  5.  Keep the language simple and easy to understand.
+  6.  Be concise.
 
   Here is the blood report:
   {{{pdfText}}}`,

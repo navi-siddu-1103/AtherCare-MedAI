@@ -19,23 +19,36 @@ type AnalysisState = {
 };
 
 const formatAnalysis = (text: string) => {
-    const sections = text.split('## ').filter(Boolean);
-    return sections.map((section, index) => {
-        const lines = section.split('\n').filter(Boolean);
-        const title = lines[0];
-        const points = lines.slice(1).map(line => line.replace('* ', ''));
-        return (
-            <div key={index} className="mb-4 last:mb-0">
-                <h3 className="font-semibold text-foreground">{title}</h3>
-                <ul className="mt-2 list-disc list-inside space-y-1 text-muted-foreground">
-                    {points.map((point, i) => (
-                        <li key={i}>{point}</li>
-                    ))}
-                </ul>
-            </div>
-        );
-    });
+    // Split the text into sections based on the headings.
+    // We use a regex to split by the headings (like "Results Interpretation")
+    // while keeping the headings in the resulting array.
+    const sections = text.split(/(Results Interpretation|What It Means for Health|Next Steps\/Questions for Provider)/g).filter(Boolean);
+
+    const formattedSections = [];
+    for (let i = 0; i < sections.length; i += 2) {
+        const title = sections[i];
+        const content = sections[i + 1] || '';
+        
+        // Split content into bullet points based on the '*' character and clean up whitespace.
+        const points = content.split('*').map(p => p.trim()).filter(Boolean);
+
+        if(title && points.length > 0){
+            formattedSections.push(
+                <div key={title} className="mb-4 last:mb-0">
+                    <h3 className="font-semibold text-foreground">{title.replace(/\\n/g, '')}</h3>
+                    <ul className="mt-2 list-disc list-inside space-y-1 text-muted-foreground">
+                        {points.map((point, index) => (
+                            <li key={index}>{point.replace(/\\n/g, '')}</li>
+                        ))}
+                    </ul>
+                </div>
+            );
+        }
+    }
+    
+    return formattedSections;
 };
+
 
 export default function BloodReportClient() {
   const [file, setFile] = useState<File | null>(null);
