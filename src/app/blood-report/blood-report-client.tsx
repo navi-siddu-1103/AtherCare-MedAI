@@ -36,7 +36,7 @@ const formatAnalysis = (text: string) => {
             formattedSections.push(
                 <div key={title} className="mb-4 last:mb-0">
                     <h3 className="font-semibold text-foreground">{title.replace(/\\n/g, '')}</h3>
-                    <ul className="mt-2 list-disc list-inside space-y-1 text-muted-foreground">
+                    <ul className="mt-2 list-disc list-outside space-y-1 text-muted-foreground pl-5">
                         {points.map((point, index) => (
                             <li key={index}>{point.replace(/\\n/g, '')}</li>
                         ))}
