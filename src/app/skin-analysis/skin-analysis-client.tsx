@@ -173,8 +173,8 @@ export default function SkinAnalysisClient() {
   };
 
   return (
-    <div className="mt-6 grid gap-8 lg:grid-cols-2">
-      <Card>
+    <div className="mt-6 w-full max-w-2xl space-y-8">
+      <Card className="w-full">
         <CardHeader>
           <CardTitle>Provide Skin Image</CardTitle>
           <CardDescription>
