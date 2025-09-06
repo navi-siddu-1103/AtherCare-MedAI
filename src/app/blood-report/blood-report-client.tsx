@@ -17,6 +17,25 @@ type AnalysisState = {
   result: AnalyzeBloodReportOutput | null;
 };
 
+const formatAnalysis = (text: string) => {
+    const sections = text.split('## ').filter(Boolean);
+    return sections.map((section, index) => {
+        const lines = section.split('\n').filter(Boolean);
+        const title = lines[0];
+        const points = lines.slice(1).map(line => line.replace('* ', ''));
+        return (
+            <div key={index} className="mb-4 last:mb-0">
+                <h3 className="font-semibold text-foreground">{title}</h3>
+                <ul className="mt-2 list-disc list-inside space-y-1 text-muted-foreground">
+                    {points.map((point, i) => (
+                        <li key={i}>{point}</li>
+                    ))}
+                </ul>
+            </div>
+        );
+    });
+};
+
 export default function BloodReportClient() {
   const [file, setFile] = useState<File | null>(null);
   const [analysis, setAnalysis] = useState<AnalysisState>({
@@ -159,14 +178,12 @@ export default function BloodReportClient() {
                 An easy-to-understand summary of your blood report.
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent>
               <Alert>
                 <Bot className="h-4 w-4" />
                 <AlertTitle>AI Summary</AlertTitle>
-                <AlertDescription className="prose-sm max-w-none dark:prose-invert">
-                  {analysis.result.analysisResult.split('\n').map((line, i) => (
-                    <p key={i} className="mb-2">{line}</p>
-                  ))}
+                <AlertDescription>
+                  {formatAnalysis(analysis.result.analysisResult)}
                   <p className="mt-4 text-xs text-muted-foreground">
                     Disclaimer: This is an AI-generated analysis and not a substitute for professional medical advice.
                   </p>

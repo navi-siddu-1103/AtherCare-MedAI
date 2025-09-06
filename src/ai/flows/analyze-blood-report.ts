@@ -25,7 +25,7 @@ export type AnalyzeBloodReportInput = z.infer<typeof AnalyzeBloodReportInputSche
 const AnalyzeBloodReportOutputSchema = z.object({
   analysisResult: z
     .string()
-    .describe("The AI-powered analysis summarizing the key findings and explaining their potential implications."),
+    .describe("A structured, AI-powered analysis summarizing key findings, health implications, and next steps. Formatted with headings starting with '##' and bullet points with '*'. Example: '## Section Title\\n* Point 1\\n* Point 2'"),
 });
 export type AnalyzeBloodReportOutput = z.infer<typeof AnalyzeBloodReportOutputSchema>;
 
@@ -37,12 +37,19 @@ const analyzeBloodReportPrompt = ai.definePrompt({
   name: 'analyzeBloodReportPrompt',
   input: { schema: AnalyzeBloodReportInputSchema },
   output: { schema: AnalyzeBloodReportOutputSchema },
-  prompt: `You are a medical expert skilled in analyzing blood reports. Provide a well-structured analysis of these CBC results with clear sections for:
-1) Results interpretation
-2) What it means for health
-3) Next steps/questions for healthcare provider
+  prompt: `You are a medical expert skilled in analyzing blood reports. Provide a well-structured analysis of these CBC results with clear sections.
 
-Use proper markdown formatting and be concise but thorough. Avoid repetitive disclaimers and focus on actionable insights.
+  **CRITICAL INSTRUCTIONS:**
+  1.  Use '##' for main headings (e.g., "## Results Interpretation").
+  2.  Use '*' for bullet points under each heading.
+  3.  DO NOT use any other markdown (like '###' or bolding with '**').
+  4.  Keep the language simple and easy to understand.
+  5.  Be concise.
+
+  Provide sections for:
+  - Results Interpretation
+  - What It Means for Health
+  - Next Steps/Questions for Provider
 
   Here is the blood report:
   {{{pdfText}}}`,
