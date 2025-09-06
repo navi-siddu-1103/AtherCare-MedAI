@@ -9,7 +9,7 @@ export default function BloodReportPage() {
           Upload your blood report in PDF format for an intelligent, easy-to-understand summary.
         </p>
       </div>
-      <div className="flex-1 flex items-center justify-center">
+      <div className="flex-1 flex flex-col items-center justify-center">
         <BloodReportClient />
       </div>
     </div>
