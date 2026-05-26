@@ -8,6 +8,7 @@ const breadcrumbMap: Record<string, string> = {
   '/hospitals': 'Hospitals',
   '/chat': 'AI Chatbot',
   '/health-profile': 'Health Profile',
+  '/health-tips': 'Health Tips',
 };
 
 export interface Breadcrumb {

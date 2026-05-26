@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowRight, Scan, FileText, Hospital, MessageSquare, Activity, TrendingUp, Clock, Stethoscope } from 'lucide-react';
+import { ArrowRight, Scan, FileText, Hospital, MessageSquare, Activity, TrendingUp, Clock, Stethoscope, Lightbulb } from 'lucide-react';
 import Image from 'next/image';
 import { useAuth } from '@/contexts/auth-context';
 import StatisticCard from '@/components/statistic-card';
@@ -156,7 +156,7 @@ export default function DashboardPage() {
       {/* Quick Links */}
       <section className="mt-8">
         <h2 className="font-headline text-2xl font-semibold mb-4">Quick Links</h2>
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           <Button asChild variant="outline" className="justify-start h-auto py-3">
             <Link href="/health-profile">
               <div className="flex items-start gap-3">
@@ -175,6 +175,17 @@ export default function DashboardPage() {
                 <div className="text-left">
                   <div className="font-semibold">Ask AI Chatbot</div>
                   <div className="text-xs text-muted-foreground">Get answers to health questions</div>
+                </div>
+              </div>
+            </Link>
+          </Button>
+          <Button asChild variant="outline" className="justify-start h-auto py-3">
+            <Link href="/health-tips">
+              <div className="flex items-start gap-3">
+                <Lightbulb className="h-5 w-5 mt-0.5 text-orange-600" />
+                <div className="text-left">
+                  <div className="font-semibold">Health Tips & Articles</div>
+                  <div className="text-xs text-muted-foreground">Read wellness advice</div>
                 </div>
               </div>
             </Link>

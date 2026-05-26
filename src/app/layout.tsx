@@ -7,6 +7,7 @@ import SplashScreen from '@/components/layout/splash-screen';
 import { Toaster } from '@/components/ui/toaster';
 import './globals.css';
 import { AuthProvider, useAuth } from '@/contexts/auth-context';
+import { ThemeProvider } from '@/contexts/theme-context';
 import { usePathname } from 'next/navigation';
 
 // Even though this is a client component, we can still define metadata
@@ -51,9 +52,11 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body antialiased">
-        <AuthProvider>
-          <AppContent>{children}</AppContent>
-        </AuthProvider>
+        <ThemeProvider>
+          <AuthProvider>
+            <AppContent>{children}</AppContent>
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
