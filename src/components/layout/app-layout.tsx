@@ -12,6 +12,7 @@ import {
   Scan,
   Hospital,
   LogOut,
+  User,
 } from 'lucide-react';
 import {
   SidebarProvider,
@@ -42,6 +43,7 @@ const menuItems = [
   { href: '/blood-report', label: 'Blood Report', icon: FileText },
   { href: '/hospitals', label: 'Hospitals', icon: Hospital },
   { href: '/chat', label: 'AI Chatbot', icon: MessageSquare },
+  { href: '/health-profile', label: 'Health Profile', icon: User },
 ];
 
 export default function AppLayout({ children }: AppLayoutProps) {
