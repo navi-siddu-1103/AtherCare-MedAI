@@ -13,6 +13,7 @@ import {
   Hospital,
   LogOut,
   User,
+  Stethoscope,
 } from 'lucide-react';
 import {
   SidebarProvider,
@@ -41,6 +42,7 @@ const menuItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/skin-analysis', label: 'Skin Analysis', icon: Scan },
   { href: '/blood-report', label: 'Blood Report', icon: FileText },
+  { href: '/symptom-checker', label: 'Symptom Checker', icon: Stethoscope },
   { href: '/hospitals', label: 'Hospitals', icon: Hospital },
   { href: '/chat', label: 'AI Chatbot', icon: MessageSquare },
   { href: '/health-profile', label: 'Health Profile', icon: User },

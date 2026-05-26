@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowRight, Scan, FileText, Hospital, MessageSquare, Activity, TrendingUp, Clock } from 'lucide-react';
+import { ArrowRight, Scan, FileText, Hospital, MessageSquare, Activity, TrendingUp, Clock, Stethoscope } from 'lucide-react';
 import Image from 'next/image';
 import { useAuth } from '@/contexts/auth-context';
 import StatisticCard from '@/components/statistic-card';
@@ -29,6 +29,12 @@ const features = [
     description: 'Get intelligent explanations of your blood report PDFs for better understanding.',
     href: '/blood-report',
     icon: <FileText className="h-8 w-8 text-accent" />,
+  },
+  {
+    title: 'Symptom Checker',
+    description: 'Assess your symptoms and get preliminary guidance on potential conditions.',
+    href: '/symptom-checker',
+    icon: <Stethoscope className="h-8 w-8 text-accent" />,
   },
   {
     title: 'Nearby Hospitals',
@@ -109,7 +115,7 @@ export default function DashboardPage() {
       {/* Main Features */}
       <section>
         <h2 className="font-headline text-2xl font-semibold mb-4">Get Started</h2>
-        <div className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-5">
           {features.map((feature) => (
             <Card
               key={feature.title}
@@ -117,13 +123,13 @@ export default function DashboardPage() {
             >
               <CardHeader>
                   <div className="mb-4">{feature.icon}</div>
-                  <CardTitle className="font-headline">{feature.title}</CardTitle>
+                  <CardTitle className="font-headline text-base">{feature.title}</CardTitle>
               </CardHeader>
               <CardContent className="flex-grow">
                   <p className="text-sm text-muted-foreground">{feature.description}</p>
               </CardContent>
               <CardFooter>
-                  <Button asChild className="w-full" variant="secondary">
+                  <Button asChild className="w-full" variant="secondary" size="sm">
                       <Link href={feature.href}>
                           Explore <ArrowRight className="ml-2 h-4 w-4" />
                       </Link>
