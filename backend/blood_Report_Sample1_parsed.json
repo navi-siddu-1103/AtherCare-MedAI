@@ -1,0 +1,1182 @@
+{
+  "patient": {},
+  "items": {
+    "30 years": {
+      "label": "30 Years",
+      "value": 30.0,
+      "unit": "Years",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "14/5/2023": {
+      "label": "14/5/2023",
+      "value": 11.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "439854467": {
+      "label": "439854467",
+      "value": 439.0,
+      "unit": "854467",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "16/5/2023": {
+      "label": "16/5/2023",
+      "value": 1.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "18 rohini": {
+      "label": "18, ROHINI",
+      "value": 18.0,
+      "unit": ",",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "delhi": {
+      "label": "DELHI",
+      "value": 110.0,
+      "unit": "085",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "sector": {
+      "label": "Sector",
+      "value": 18.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "swasthfit super": {
+      "label": "SwasthFit Super",
+      "value": 4.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "13 00": {
+      "label": "13.00",
+      "value": 43.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "15 00": {
+      "label": "15.00",
+      "value": 40.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "40 00": {
+      "label": "40.00",
+      "value": 80.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "45 00": {
+      "label": "45.00",
+      "value": 45.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "4 50": {
+      "label": "4.50",
+      "value": 4.5,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "mill/mm": {
+      "label": "mill/mm",
+      "value": 3.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "83 00": {
+      "label": "83.00",
+      "value": 101.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "90 00": {
+      "label": "90.00",
+      "value": 90.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "27 00": {
+      "label": "27.00",
+      "value": 32.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "32 00": {
+      "label": "32.00",
+      "value": 32.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "31 50": {
+      "label": "31.50",
+      "value": 34.5,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "33 00": {
+      "label": "33.00",
+      "value": 33.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "11 60": {
+      "label": "11.60",
+      "value": 14.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "14 00": {
+      "label": "14.00",
+      "value": 14.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "4 00": {
+      "label": "4.00",
+      "value": 4.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "thou/mm": {
+      "label": "thou/mm",
+      "value": 3.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "8 00": {
+      "label": "8.00",
+      "value": 8.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "60 00": {
+      "label": "60.00",
+      "value": 60.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "20 00": {
+      "label": "20.00",
+      "value": 20.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "30 00": {
+      "label": "30.00",
+      "value": 120.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "2 00": {
+      "label": "2.00",
+      "value": 2.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "5 00": {
+      "label": "5.00",
+      "value": 5.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "1 00": {
+      "label": "1.00",
+      "value": 3.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "glucose (fasting)": {
+      "label": "*",
+      "value": 439.0,
+      "unit": "854467*",
+      "status": "high",
+      "note": "glucose (fasting) is above the reference range (439.0 > 99).",
+      "reference_range": [
+        70,
+        99
+      ]
+    },
+    "0 00": {
+      "label": "0.00",
+      "value": 0.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "4 80": {
+      "label": "4.80",
+      "value": 4.8,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "2 40": {
+      "label": "2.40",
+      "value": 5.1,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "0 20": {
+      "label": "0.20",
+      "value": 0.2,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "0 40": {
+      "label": "0.40",
+      "value": 0.4,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "0 02": {
+      "label": "0.02",
+      "value": 0.1,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "150 00": {
+      "label": "150.00",
+      "value": 150.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "200": {
+      "label": "200",
+      "value": 200.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "6 5": {
+      "label": "6.5",
+      "value": 12.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "10 0": {
+      "label": "10.0",
+      "value": 10.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "page": {
+      "label": "Page",
+      "value": 10.0,
+      "unit": "of",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "1 as per the recommendation of international council for standardization in hematology the differential": {
+      "label": "1. As per the recommendation of International council for Standardization in Hematology, the differential",
+      "value": 1.0,
+      "unit": ".",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "2 test conducted on edta whole blood": {
+      "label": "2. Test conducted on EDTA whole blood",
+      "value": 2.0,
+      "unit": ".",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "0 90": {
+      "label": "0.90",
+      "value": 2.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "0 70": {
+      "label": "0.70",
+      "value": 1.3,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "118": {
+      "label": "118",
+      "value": 118.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "(ckd epi equation": {
+      "label": "(CKD EPI Equation",
+      "value": 202.0,
+      "unit": "1",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "ml/min/": {
+      "label": "mL/min/",
+      "value": 1.73,
+      "unit": "m2",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "hemoglobin": {
+      "label": "G",
+      "value": 1.0,
+      "unit": "g/dL",
+      "status": "low",
+      "note": "hemoglobin is below the reference range (1.0 < 12.0).",
+      "reference_range": [
+        12.0,
+        16.0
+      ]
+    },
+    "(kdigo guideline": {
+      "label": "(KDIGO Guideline",
+      "value": 201.0,
+      "unit": "2",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "9 34": {
+      "label": "9.34",
+      "value": 9.34,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "6 00": {
+      "label": "6.00",
+      "value": 20.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "10": {
+      "label": "10",
+      "value": 10.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "3 50": {
+      "label": "3.50",
+      "value": 5.1,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "11 0": {
+      "label": "11.0",
+      "value": 11.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "(ifcc without p": {
+      "label": "(IFCC without P",
+      "value": 5.0,
+      "unit": "P)",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "21 0": {
+      "label": "21.0",
+      "value": 21.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "10 00": {
+      "label": "10.00",
+      "value": 49.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "0": {
+      "label": "0",
+      "value": 73.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "0 30": {
+      "label": "0.30",
+      "value": 1.2,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "0 10": {
+      "label": "0.10",
+      "value": 0.1,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "7 00": {
+      "label": "7.00",
+      "value": 7.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "5 70": {
+      "label": "5.70",
+      "value": 8.2,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "3 20": {
+      "label": "3.20",
+      "value": 4.8,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "1 33": {
+      "label": "1.33",
+      "value": 1.33,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "3 00": {
+      "label": "3.00",
+      "value": 3.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "2 0": {
+      "label": "2.0",
+      "value": 3.5,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "8 70": {
+      "label": "8.70",
+      "value": 10.4,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "140 00": {
+      "label": "140.00",
+      "value": 140.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "136 00": {
+      "label": "136.00",
+      "value": 145.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "101 00": {
+      "label": "101.00",
+      "value": 101.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "98 00": {
+      "label": "98.00",
+      "value": 107.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "1 ": {
+      "label": "1.",
+      "value": 1.0,
+      "unit": ".",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "estimated gfr (egfr) calculated using the": {
+      "label": "Estimated GFR  (eGFR) calculated using the",
+      "value": 202.0,
+      "unit": "1",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "reported as per kdigo guideline": {
+      "label": "reported as per KDIGO guideline",
+      "value": 201.0,
+      "unit": "2",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "2 ": {
+      "label": "2.",
+      "value": 2.0,
+      "unit": ".",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "egfr category g": {
+      "label": "eGFR category G",
+      "value": 1.0,
+      "unit": "or",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "3 ": {
+      "label": "3.",
+      "value": 3.0,
+      "unit": ".",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "creatinine": {
+      "label": "BUN/creatinine ratio is about",
+      "value": 10.0,
+      "unit": "mg/dL",
+      "status": "high",
+      "note": "creatinine is above the reference range (10.0 > 1.3).",
+      "reference_range": [
+        0.6,
+        1.3
+      ]
+    },
+    "105 00": {
+      "label": "105.00",
+      "value": 105.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "130 00": {
+      "label": "130.00",
+      "value": 130.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "46 00": {
+      "label": "46.00",
+      "value": 46.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "26 00": {
+      "label": "26.00",
+      "value": 26.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "59": {
+      "label": "59",
+      "value": 59.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "samples": {
+      "label": "samples",
+      "value": 1.0,
+      "unit": "week",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "cholesterol (total)": {
+      "label": "mg/dL. Measurement of Direct LDL cholesterol is recommended when Triglyceride level is >",
+      "value": 400.0,
+      "unit": "mg/dL",
+      "status": "high",
+      "note": "cholesterol (total) is above the reference range (400.0 > 200).",
+      "reference_range": [
+        0,
+        200
+      ]
+    },
+    "lipid association of india (lai) recommends screening of all adults above the age of": {
+      "label": "Lipid Association of India (LAI) recommends screening of all adults above the age of",
+      "value": 20.0,
+      "unit": "years",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "4 ": {
+      "label": "4.",
+      "value": 4.0,
+      "unit": ".",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "5 ": {
+      "label": "5.",
+      "value": 5.0,
+      "unit": ".",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "6 ": {
+      "label": "6.",
+      "value": 6.0,
+      "unit": ".",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "7 ": {
+      "label": "7.",
+      "value": 7.0,
+      "unit": ".",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "8 ": {
+      "label": "8.",
+      "value": 8.0,
+      "unit": ".",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "additional testing for apolipoprotein b hscrp lp(a ) lp-pla": {
+      "label": "Additional testing for Apolipoprotein B, hsCRP, Lp(a ) & LP-PLA",
+      "value": 2.0,
+      "unit": "should",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "treatment goals as per lipid association of india": {
+      "label": "Treatment Goals as per Lipid Association of India",
+      "value": 202.0,
+      "unit": "0",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    " extreme ": {
+      "label": "| Extreme    |       <",
+      "value": 50.0,
+      "unit": "|",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    " risk group (optional goal ": {
+      "label": "| Risk Group |(Optional goal ≤",
+      "value": 30.0,
+      "unit": ")",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    " risk group ": {
+      "label": "| Risk Group |       ≤",
+      "value": 30.0,
+      "unit": "|",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    " very ": {
+      "label": "|   Very     |       <",
+      "value": 50.0,
+      "unit": "|",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    " high ": {
+      "label": "|   High     |       <",
+      "value": 70.0,
+      "unit": "|",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    " moderate ": {
+      "label": "| Moderate   |       <",
+      "value": 100.0,
+      "unit": "|",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    " low ": {
+      "label": "|    Low     |       <",
+      "value": 100.0,
+      "unit": "|",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "least": {
+      "label": "least",
+      "value": 3.0,
+      "unit": "months",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "hb": {
+      "label": "|                                      | higher HbA",
+      "value": 1.0,
+      "unit": "c",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "5 3": {
+      "label": "5.3",
+      "value": 5.3,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "105": {
+      "label": "105",
+      "value": 105.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    " adults ": {
+      "label": "|                 | adults >=",
+      "value": 18.0,
+      "unit": "years",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "hba1c": {
+      "label": "| HbA1c in %      |",
+      "value": 4.0,
+      "unit": "%",
+      "status": "normal",
+      "note": "hba1c is within the reference range.",
+      "reference_range": [
+        4.0,
+        5.6
+      ]
+    },
+    "national reference laboratory block e sector": {
+      "label": "National Reference laboratory, Block E, Sector",
+      "value": 18.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "70": {
+      "label": "70",
+      "value": 100.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "platelets": {
+      "label": "T",
+      "value": 4.0,
+      "unit": ",",
+      "status": "low",
+      "note": "platelets is below the reference range (4.0 < 150).",
+      "reference_range": [
+        150,
+        450
+      ]
+    },
+    "0 60": {
+      "label": "0.60",
+      "value": 1.81,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "5 01": {
+      "label": "5.01",
+      "value": 12.45,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "0 550": {
+      "label": "0.550",
+      "value": 4.78,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "tsh levels are subject to circadian variation reaching peak levels between": {
+      "label": "TSH levels are subject to circadian variation, reaching peak levels between",
+      "value": 2.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "minimum between": {
+      "label": "minimum between",
+      "value": 6.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "alteration in concentration of thyroid hormone binding protein can profoundly affect total t": {
+      "label": "Alteration in concentration of Thyroid hormone binding protein can profoundly affect Total T",
+      "value": 3.0,
+      "unit": "and/or",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "total t": {
+      "label": "Total T",
+      "value": 4.0,
+      "unit": "levels",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "unbound fraction ( free t": {
+      "label": "Unbound fraction ( Free,T",
+      "value": 4.0,
+      "unit": "/Free,T3)",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "more closely with clinical status of the patient than total t": {
+      "label": "more closely with clinical status of the patient than total T",
+      "value": 4.0,
+      "unit": "/T3",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "values ": {
+      "label": "Values <",
+      "value": 0.03,
+      "unit": "uIU/mL",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "vitamin b": {
+      "label": "VITAMIN B",
+      "value": 12.0,
+      "unit": ";",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "280 00": {
+      "label": "280.00",
+      "value": 280.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "211 00": {
+      "label": "211.00",
+      "value": 911.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "false increase in vitamin b": {
+      "label": "False increase in Vitamin B",
+      "value": 12.0,
+      "unit": "levels",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "the concentration of vitamin b": {
+      "label": "The concentration of Vitamin B",
+      "value": 12.0,
+      "unit": "obtained",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "vitamin d ": {
+      "label": "VITAMIN D,",
+      "value": 25.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "85 00": {
+      "label": "85.00",
+      "value": 85.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "75 00": {
+      "label": "75.00",
+      "value": 250.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    " deficient ": {
+      "label": "| Deficient     | <",
+      "value": 50.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    " insufficient ": {
+      "label": "| Insufficient  |",
+      "value": 50.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    " sufficient ": {
+      "label": "| Sufficient    |",
+      "value": 75.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    " potential ": {
+      "label": "| Potential     | >",
+      "value": 250.0,
+      "unit": "|",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "the assay measures both d": {
+      "label": "The assay measures both D",
+      "value": 2.0,
+      "unit": "(Ergocalciferol)",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "25 (oh)d is influenced by sunlight latitude skin pigmentation sunscreen use and hepatic function ": {
+      "label": "25 (OH)D is influenced by sunlight, latitude, skin pigmentation, sunscreen use and hepatic function.",
+      "value": 25.0,
+      "unit": "(OH)D",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "optimal calcium absorption requires vitamin d": {
+      "label": "Optimal calcium absorption requires vitamin D",
+      "value": 25.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "patientreportscsuperpanel sp general template01 sc (version": {
+      "label": "PatientReportSCSuperPanel.SP_GENERAL_TEMPLATE01_SC (Version",
+      "value": 7.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "it shows seasonal variation with values being": {
+      "label": "It shows seasonal variation, with values being",
+      "value": 40.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "tetany vitamin d status is best determined by measurement of": {
+      "label": "Tetany.  Vitamin D status is best determined  by measurement of",
+      "value": 25.0,
+      "unit": "hydroxy",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "circulating form and has longer half life (2": {
+      "label": "circulating form and has longer half life (2",
+      "value": 3.0,
+      "unit": "weeks",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "derivation of exact value kindly submit request within": {
+      "label": "derivation of exact value. Kindly submit request within",
+      "value": 72.0,
+      "unit": "hours",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    " 91": {
+      "label": "+91",
+      "value": 11.0,
+      "unit": "",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    },
+    "national reference lab delhi a cap (7171001) accredited iso": {
+      "label": "National Reference lab, Delhi, a CAP (7171001) Accredited, ISO",
+      "value": 900.0,
+      "unit": "1",
+      "status": "unknown",
+      "note": "No reference range available to compare.",
+      "reference_range": null
+    }
+  },
+  "recommendations": [
+    "Hemoglobin is low — consider evaluation for anemia. Check ferritin, iron studies, vitamin B12, folate, and review for blood loss.",
+    "Platelet count is low — assess for bleeding risk and consider hematology consult if significantly low.",
+    "Serum creatinine is elevated — consider assessing renal function and calculating eGFR; repeat and correlate clinically.",
+    "Total cholesterol >200 mg/dL — evaluate cardiovascular risk and consider lifestyle changes / lipid profile management.",
+    "This automated analysis is informational only. Discuss the report with a qualified healthcare professional for diagnosis and treatment."
+  ]
+}
