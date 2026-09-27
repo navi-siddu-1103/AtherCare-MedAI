@@ -42,9 +42,12 @@ num_classes = len(classes)
 # ----------------------------------------------------------
 # Load trained model
 # ----------------------------------------------------------
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, "best_model.pth")
+
 try:
     model = EfficientNet.from_pretrained("efficientnet-b3", num_classes=num_classes)
-    model.load_state_dict(torch.load("best_model.pth", map_location=device))
+    model.load_state_dict(torch.load(MODEL_PATH, map_location=device))
     model = model.to(device)
     model.eval()
     print("✅ Model loaded successfully")
@@ -244,7 +247,19 @@ def analyze_report():
     return jsonify(response)
 
 # ----------------------------------------------------------
+# Root / Health check endpoint
+# ----------------------------------------------------------
+@app.route("/", methods=["GET"])
+def health_check():
+    return jsonify({
+        "status": "healthy",
+        "service": "AtherCare-MedAI Backend",
+        "endpoints": ["/predict", "/get", "/analyze"]
+    }), 200
+
+# ----------------------------------------------------------
 # Run the app
 # ----------------------------------------------------------
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000, debug=True)
+    port = int(os.environ.get("PORT", 8000))
+    app.run(host="0.0.0.0", port=port)
