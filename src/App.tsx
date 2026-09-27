@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "leaflet/dist/leaflet.css";
+import SplashScreen from "@/components/SplashScreen";
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -19,37 +21,54 @@ import EmergencyNavigation from "@/pages/EmergencyNavigation";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/medical-history" element={<FeaturePage />} />
-          <Route path="/chatbot" element={<ChatbotSection />} />
-          <Route path="/book-appointment" element={<FeaturePage />} />
-          <Route path="/userstats" element={<UserStats />} />
+const App = () => {
+  const [splashDone, setSplashDone] = useState(false);
 
-          <Route path="/medical-query" element={<FeaturePage />} />
-           <Route path="/disease-detection" element={<AISkinScanner />} />
-          <Route path="/blood-analyzer" element={<BloodAnalyzer />} />
-          <Route path="/emergency-navigation" element={<EmergencyNavigation />} />
-          <Route path="/general-query" element={<FeaturePage />} />
-          <Route path="/profile" element={<Profile />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+
+        {/* Show splash screen until onFinish is called */}
+        {!splashDone && <SplashScreen onFinish={() => setSplashDone(true)} />}
+
+        {/* Main app (rendered but hidden behind splash via opacity) */}
+        <div
+          style={{
+            opacity: splashDone ? 1 : 0,
+            transition: "opacity 0.5s ease",
+            pointerEvents: splashDone ? "auto" : "none",
+          }}
+        >
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/medical-history" element={<FeaturePage />} />
+              <Route path="/chatbot" element={<ChatbotSection />} />
+              <Route path="/book-appointment" element={<FeaturePage />} />
+              <Route path="/userstats" element={<UserStats />} />
+              <Route path="/medical-query" element={<FeaturePage />} />
+              <Route path="/disease-detection" element={<AISkinScanner />} />
+              <Route path="/blood-analyzer" element={<BloodAnalyzer />} />
+              <Route path="/emergency-navigation" element={<EmergencyNavigation />} />
+              <Route path="/general-query" element={<FeaturePage />} />
+              <Route path="/profile" element={<Profile />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </div>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
+
 
 
 /*
