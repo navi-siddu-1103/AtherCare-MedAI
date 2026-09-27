@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Send, Bot, User, Sparkles, Clock, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "@/config/api";
 
 const ChatbotSection = () => {
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ const ChatbotSection = () => {
     setIsTyping(true);
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/get", {
+      const response = await fetch(`${API_BASE_URL}/get`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ msg: userMessage.message }),
