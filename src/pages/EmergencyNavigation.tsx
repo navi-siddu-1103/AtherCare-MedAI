@@ -179,21 +179,23 @@ const EmergencyNavigation = () => {
 
       <div className="max-w-6xl mx-auto py-8 px-4">
         {/* Header */}
-        <div className="flex items-center mb-6 gap-2">
-          <div className="p-2 bg-gradient-medical rounded-full shadow-medical">
-            <Ambulance className="h-6 w-6 text-primary-foreground" />
+        <div className="flex items-center mb-6 gap-3">
+          <div className="p-2.5 bg-gradient-medical rounded-xl shadow-medical">
+            <Ambulance className="h-6 w-6 text-white" />
           </div>
-          <h1 className="text-3xl font-bold text-foreground">Emergency Navigation</h1>
+          <h1 className="text-3xl font-bold text-foreground">
+            Emergency <span className="bg-gradient-medical bg-clip-text text-transparent">Navigation</span>
+          </h1>
         </div>
 
         {/* Map Card */}
-        <Card className="shadow-card-medical border-medical-border bg-gradient-card mb-8">
+        <Card className="shadow-card-medical border-medical-border bg-gradient-card backdrop-blur-md mb-8">
           <CardHeader>
             <CardTitle className="text-lg text-foreground">Live Map & Nearby Hospitals</CardTitle>
           </CardHeader>
 
           <CardContent>
-            <div className="w-full h-[380px] rounded-xl overflow-hidden border border-medical-border">
+            <div className="w-full h-[380px] rounded-xl overflow-hidden border border-medical-border shadow-inner">
               <MapContainer
                 center={positionToUse}
                 zoom={13}
@@ -203,8 +205,8 @@ const EmergencyNavigation = () => {
                 <RecenterMap position={positionToUse} />
 
                 <TileLayer
-                  attribution="&copy; OpenStreetMap contributors"
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  attribution='&copy; <a href="https://carto.com/">CARTO</a> &copy; OpenStreetMap contributors'
+                  url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
                 />
 
                 {/* User Marker */}
@@ -249,25 +251,27 @@ const EmergencyNavigation = () => {
         ) : (
           <div className="space-y-4">
             {hospitals.map((h) => (
-              <div key={h.id} className="bg-white rounded-xl shadow-medical border p-4">
-                <p className="font-semibold">{h.name}</p>
+              <div key={h.id} className="bg-card/90 backdrop-blur-md rounded-xl shadow-card-medical border border-medical-border p-4 hover:border-primary/40 transition-colors">
+                <p className="font-semibold text-foreground">{h.name}</p>
                 <p className="text-sm text-muted-foreground">{h.address || "Address not available"}</p>
                 <p className="text-sm">
-                  <span className="font-medium">Type:</span> {h.type}
+                  <span className="font-medium text-foreground">Type:</span> {h.type}
                 </p>
                 <p className="text-sm">
-                  <span className="font-medium">Doctor Availability:</span>{" "}
-                  {h.doctorAvailable ? "Yes" : "No"}
+                  <span className="font-medium text-foreground">Doctor Availability:</span>{" "}
+                  <span className={h.doctorAvailable ? "text-emerald-400 font-medium" : "text-rose-400"}>
+                    {h.doctorAvailable ? "Yes" : "No"}
+                  </span>
                 </p>
                 <p className="text-sm">
-                  <span className="font-medium">Distance:</span> {h.distance.toFixed(2)} km
+                  <span className="font-medium text-foreground">Distance:</span> {h.distance.toFixed(2)} km
                 </p>
                 <a
                   href={getDirectionsUrl(h.lat, h.lon)}
                   target="_blank"
-                  className="text-sm text-primary font-medium"
+                  className="text-sm text-primary font-medium hover:underline inline-block mt-1"
                 >
-                  Get Directions
+                  Get Directions →
                 </a>
               </div>
             ))}

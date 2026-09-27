@@ -81,18 +81,18 @@ const Signup = () => {
           <div className="text-center">
             <div className="flex justify-center mb-4">
               <div className="p-3 bg-gradient-medical rounded-full shadow-medical">
-                <Heart className="h-8 w-8 text-primary-foreground" />
+                <Heart className="h-8 w-8 text-white" />
               </div>
             </div>
             <h2 className="text-3xl font-bold text-foreground">
               Create your account
             </h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              Join MediConnect AI to access advanced healthcare features
+              Join AtherCare MedAI to access advanced healthcare features
             </p>
           </div>
 
-          <Card className="shadow-card-medical border-medical-border bg-gradient-card">
+          <Card className="shadow-card-medical border-medical-border bg-gradient-card backdrop-blur-md">
             <CardHeader className="space-y-1">
               <CardTitle className="text-2xl text-center text-foreground">Sign up</CardTitle>
               <CardDescription className="text-center">
@@ -111,7 +111,7 @@ const Signup = () => {
                       placeholder="Enter your full name"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="pl-10 border-medical-border focus:border-primary"
+                      className="pl-10 border-medical-border bg-background/50 focus:border-primary text-foreground"
                       required
                     />
                   </div>
@@ -126,7 +126,7 @@ const Signup = () => {
                       placeholder="Enter your email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="pl-10 border-medical-border focus:border-primary"
+                      className="pl-10 border-medical-border bg-background/50 focus:border-primary text-foreground"
                       required
                     />
                   </div>
@@ -141,7 +141,7 @@ const Signup = () => {
                       placeholder="Create a password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="pl-10 border-medical-border focus:border-primary"
+                      className="pl-10 border-medical-border bg-background/50 focus:border-primary text-foreground"
                       required
                     />
                   </div>
@@ -156,14 +156,14 @@ const Signup = () => {
                       placeholder="Confirm your password"
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
-                      className="pl-10 border-medical-border focus:border-primary"
+                      className="pl-10 border-medical-border bg-background/50 focus:border-primary text-foreground"
                       required
                     />
                   </div>
                 </div>
                 <Button 
                   type="submit" 
-                  className="w-full bg-gradient-medical hover:bg-primary-glow/90 shadow-medical hover:shadow-hover-medical"
+                  className="w-full bg-gradient-medical text-white font-medium shadow-medical hover:shadow-hover-medical"
                   disabled={isLoading}
                 >
                   {isLoading ? 'Creating account...' : 'Create Account'}

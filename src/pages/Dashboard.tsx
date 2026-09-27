@@ -99,16 +99,16 @@ const Dashboard = () => {
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-3xl font-bold text-foreground">
-              Welcome, <span className="text-primary">{userName}</span>!
+              Welcome, <span className="bg-gradient-medical bg-clip-text text-transparent">{userName}</span>!
             </h1>
             <p className="text-muted-foreground mt-2">
-              This is your personalized dashboard. Use the cards below to explore MediConnect AI's features tailored to your health needs.
+              This is your personalized dashboard. Use the cards below to explore AtherCare MedAI's features tailored to your health needs.
             </p>
           </div>
           <Button 
             variant="medical" 
             onClick={handleLogout}
-            className="shadow-medical hover:shadow-hover-medical"
+            className="shadow-medical hover:shadow-hover-medical text-white font-medium"
           >
             Logout
           </Button>

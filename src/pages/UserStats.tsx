@@ -47,9 +47,9 @@ const UserStats = () => {
       <Navbar />
 
       <div className="flex justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <Card className="w-full max-w-2xl shadow-card-medical border-medical-border bg-gradient-card">
+        <Card className="w-full max-w-2xl shadow-card-medical border-medical-border bg-gradient-card backdrop-blur-md">
           <CardHeader>
-            <CardTitle className="text-2xl text-center text-foreground">
+            <CardTitle className="text-2xl text-center font-bold bg-gradient-medical bg-clip-text text-transparent">
               🔐 User Account Overview
             </CardTitle>
           </CardHeader>
@@ -57,7 +57,7 @@ const UserStats = () => {
           <CardContent className="space-y-6">
 
             {/* Total Accounts */}
-            <div className="bg-white/10 p-4 rounded-xl shadow-medical">
+            <div className="bg-slate-900/60 border border-medical-border p-4 rounded-xl shadow-card-medical">
               <h3 className="text-lg font-semibold text-foreground">
                 Total Registered Accounts:
               </h3>
@@ -67,11 +67,11 @@ const UserStats = () => {
             </div>
 
             {/* Current User */}
-            <div className="bg-white/10 p-4 rounded-xl shadow-medical space-y-2">
+            <div className="bg-slate-900/60 border border-medical-border p-4 rounded-xl shadow-card-medical space-y-2">
               <h3 className="text-lg font-semibold text-foreground">
                 Currently Logged-In User:
               </h3>
-              <p className="text-primary mt-1 text-xl">
+              <p className="text-primary mt-1 text-xl font-medium">
                 {currentUser ? currentUser : "No user is logged in"}
               </p>
 
@@ -79,7 +79,7 @@ const UserStats = () => {
               {currentUser && (
                 <Button
                   onClick={deleteMyAccount}
-                  className="bg-red-600 hover:bg-red-700 text-white mt-3"
+                  className="bg-gradient-to-r from-rose-500 to-red-600 hover:from-rose-600 hover:to-red-700 text-white mt-3 font-medium shadow-md"
                 >
                   Delete My Account
                 </Button>
@@ -87,7 +87,7 @@ const UserStats = () => {
             </div>
 
             {/* Registered Users */}
-            <div className="bg-white/10 p-4 rounded-xl shadow-medical">
+            <div className="bg-slate-900/60 border border-medical-border p-4 rounded-xl shadow-card-medical">
               <h3 className="text-lg font-semibold text-foreground mb-3">
                 Registered Users List:
               </h3>
@@ -99,10 +99,15 @@ const UserStats = () => {
                   {users.map((u, index) => (
                     <li
                       key={index}
-                      className="p-3 bg-white/5 rounded-lg border border-medical-border"
+                      className="p-3 bg-background/50 rounded-lg border border-medical-border flex justify-between items-center"
                     >
-                      <p className="text-foreground font-medium">{u.name}</p>
-                      <p className="text-muted-foreground text-sm">{u.email}</p>
+                      <div>
+                        <p className="text-foreground font-medium">{u.name}</p>
+                        <p className="text-muted-foreground text-sm">{u.email}</p>
+                      </div>
+                      <span className="text-xs px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+                        Active
+                      </span>
                     </li>
                   ))}
                 </ul>

@@ -83,13 +83,13 @@ const BloodAnalyzer = () => {
   const previewURL = isImage ? URL.createObjectURL(uploadedFile) : null;
 
   return (
-    <section id="blood-analyzer" className="py-24 bg-background">
+    <section id="blood-analyzer" className="min-h-screen py-16 bg-gradient-hero">
       <div className="container mx-auto px-4">
         {/* Header Section */}
         <div className="w-full flex flex-col items-center mb-12">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-center ml-[250px]">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-center">
             Blood Report{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-primary">
+            <span className="bg-gradient-medical bg-clip-text text-transparent">
               AI Analyzer
             </span>
           </h2>
@@ -101,7 +101,7 @@ const BloodAnalyzer = () => {
             <Button 
               variant="outline" 
               onClick={() => navigate("/dashboard")}
-              className="flex items-center gap-2 ml-[450px]"
+              className="border-primary/40 text-primary hover:bg-primary/10 hover:border-primary flex items-center gap-2"
             >
               <ArrowLeft className="w-4 h-4" />
               Back to Dashboard
@@ -113,11 +113,11 @@ const BloodAnalyzer = () => {
         <div className="max-w-6xl mx-auto">
           {!hasResults ? (
             <div className="max-w-2xl mx-auto">
-              <Card className="border-2 border-dashed border-primary/20 hover:border-primary/40 transition-colors">
+              <Card className="border border-medical-border bg-gradient-card backdrop-blur-md hover:border-primary/40 transition-colors shadow-card-medical">
                 <CardContent className="p-12">
                   {!uploadedFile ? (
                     <div className="text-center space-y-6">
-                      <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mx-auto">
+                      <div className="w-16 h-16 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mx-auto shadow-medical">
                         <FileText className="w-8 h-8 text-primary" />
                       </div>
 
@@ -130,7 +130,7 @@ const BloodAnalyzer = () => {
 
                       <div className="space-y-4">
                         <label htmlFor="report-upload">
-                          <Button variant="medical" size="lg" className="cursor-pointer" asChild>
+                          <Button variant="medical" size="lg" className="cursor-pointer shadow-medical hover:shadow-hover-medical text-white font-medium" asChild>
                             <span>
                               <Upload className="w-5 h-5 mr-2" />
                               Choose File
@@ -188,7 +188,7 @@ const BloodAnalyzer = () => {
           ) : (
             <div className="space-y-8">
               {/* Analysis Summary */}
-              <Card>
+              <Card className="border border-medical-border bg-gradient-card backdrop-blur-md shadow-card-medical">
                 <CardHeader>
                   <CardTitle className="text-2xl font-bold flex items-center gap-3">
                     <CheckCircle className="w-6 h-6 text-primary" />
@@ -200,10 +200,10 @@ const BloodAnalyzer = () => {
                     Object.entries(analysisData.results).map(([test, details]: [string, any]) => (
                       <div
                         key={test}
-                        className="flex justify-between items-center border-b border-border py-3"
+                        className="flex justify-between items-center border-b border-border/60 py-3"
                       >
                         <div>
-                          <p className="font-semibold capitalize">{test.replace(/_/g, " ")}</p>
+                          <p className="font-semibold capitalize text-foreground">{test.replace(/_/g, " ")}</p>
                           <p className="text-sm text-muted-foreground">
                             Value: {details.value} {details.unit}
                           </p>
@@ -222,10 +222,10 @@ const BloodAnalyzer = () => {
               </Card>
 
               {/* Recommendations */}
-              <Card>
+              <Card className="border border-medical-border bg-gradient-card backdrop-blur-md shadow-card-medical">
                 <CardHeader>
                   <CardTitle className="text-2xl font-bold flex items-center gap-3">
-                    <AlertTriangle className="w-6 h-6 text-yellow-500" />
+                    <AlertTriangle className="w-6 h-6 text-amber-400" />
                     AI Recommendations
                   </CardTitle>
                 </CardHeader>
@@ -243,7 +243,11 @@ const BloodAnalyzer = () => {
               </Card>
 
               <div className="flex justify-center">
-                <Button variant="outline" onClick={resetAnalyzer}>
+                <Button 
+                  variant="outline" 
+                  onClick={resetAnalyzer}
+                  className="border-primary/40 text-primary hover:bg-primary/10 hover:border-primary"
+                >
                   Analyze Another Report
                 </Button>
               </div>

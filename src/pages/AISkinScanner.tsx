@@ -91,12 +91,12 @@ const AISkinScanner = () => {
   };
 
   return (
-    <section id="ai-scanner" className="py-24 bg-muted/30">
+    <section id="ai-scanner" className="min-h-screen py-16 bg-gradient-hero">
       <div className="container mx-auto px-4">
         {/* Heading */}
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-5xl font-bold mb-6 text-center">
-            AI <span className="bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent">Skin Scanner</span>
+            AI <span className="bg-gradient-medical bg-clip-text text-transparent">Skin Scanner</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Upload a skin image for instant AI analysis of skin conditions
@@ -105,7 +105,7 @@ const AISkinScanner = () => {
             <Button
               variant="outline"
               onClick={() => navigate("/dashboard")}
-              className="flex items-center gap-2"
+              className="border-primary/40 text-primary hover:bg-primary/10 hover:border-primary flex items-center gap-2"
             >
               <ArrowLeft className="w-4 h-4" />
               Back to Dashboard
@@ -115,12 +115,12 @@ const AISkinScanner = () => {
 
         <div className="max-w-4xl mx-auto grid lg:grid-cols-2 gap-8">
           {/* Upload Area */}
-          <Card className="border-2 border-dashed border-primary/20 hover:border-primary/40 transition-colors">
+          <Card className="border border-medical-border bg-gradient-card backdrop-blur-md hover:border-primary/40 transition-colors shadow-card-medical">
             <CardContent className="p-8">
               {!uploadedImage ? (
                 <div className="text-center space-y-6">
-                  <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto">
-                    <Scan className="w-8 h-8 text-green-600" />
+                  <div className="w-16 h-16 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mx-auto shadow-medical">
+                    <Scan className="w-8 h-8 text-primary" />
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold mb-2">Upload Skin Image</h3>
@@ -130,7 +130,7 @@ const AISkinScanner = () => {
                   </div>
                   <div className="space-y-3">
                     <label htmlFor="image-upload">
-                      <span className="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-md cursor-pointer hover:bg-green-700">
+                      <span className="inline-flex items-center px-4 py-2 bg-gradient-medical text-white font-medium rounded-md cursor-pointer shadow-medical hover:shadow-hover-medical transition-all">
                         <Upload className="w-4 h-4 mr-2" />
                         Choose Image
                       </span>
@@ -172,10 +172,10 @@ const AISkinScanner = () => {
           </Card>
 
           {/* Results Area */}
-          <Card className="border-0 shadow-card">
+          <Card className="border border-medical-border bg-gradient-card backdrop-blur-md shadow-card-medical">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 text-green-600 bg-green-100 rounded-full p-1" />
+                <CheckCircle className="w-5 h-5 text-emerald-400 bg-emerald-500/10 rounded-full p-0.5" />
                 Analysis Results
               </CardTitle>
             </CardHeader>
@@ -184,33 +184,33 @@ const AISkinScanner = () => {
                 <div className="space-y-6">
                   <div className="flex items-center justify-between">
                     <h3 className="font-semibold text-lg">{prediction}</h3>
-                    <Badge variant="secondary">Prediction</Badge>
+                    <Badge variant="secondary" className="border-primary/30 text-primary">Prediction</Badge>
                   </div>
 
                   {resultInfo && (
                     <div className="space-y-4">
-                      <h4 className="font-semibold">Description</h4>
-                      <p>{resultInfo.description}</p>
+                      <h4 className="font-semibold text-primary">Description</h4>
+                      <p className="text-muted-foreground">{resultInfo.description}</p>
 
-                      <h4 className="font-semibold">Suggested Treatments</h4>
-                      <p>{resultInfo.treatments}</p>
+                      <h4 className="font-semibold text-primary">Suggested Treatments</h4>
+                      <p className="text-muted-foreground">{resultInfo.treatments}</p>
 
-                      <h4 className="font-semibold">Precautions & Home-care</h4>
-                      <p>{resultInfo.precautions}</p>
+                      <h4 className="font-semibold text-primary">Precautions & Home-care</h4>
+                      <p className="text-muted-foreground">{resultInfo.precautions}</p>
 
-                      <h4 className="font-semibold">References</h4>
-                      <p>{resultInfo.references}</p>
+                      <h4 className="font-semibold text-primary">References</h4>
+                      <p className="text-muted-foreground">{resultInfo.references}</p>
 
-                      <p className="text-xs text-muted">Last updated: {resultInfo.last_updated}</p>
+                      <p className="text-xs text-muted-foreground">Last updated: {resultInfo.last_updated}</p>
                     </div>
                   )}
 
-                  <div className="p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+                  <div className="p-4 bg-amber-500/10 rounded-lg border border-amber-500/30">
                     <div className="flex items-start gap-2">
-                      <AlertTriangle className="w-4 h-4 text-yellow-600 mt-0.5" />
+                      <AlertTriangle className="w-4 h-4 text-amber-400 mt-0.5 shrink-0" />
                       <div className="text-sm">
-                        <p className="font-medium text-yellow-800">Important Notice</p>
-                        <p className="text-yellow-700">
+                        <p className="font-medium text-amber-300">Important Notice</p>
+                        <p className="text-amber-200/80">
                           This analysis is for informational purposes only. Please consult a healthcare professional for proper diagnosis and treatment.
                         </p>
                       </div>
@@ -220,7 +220,7 @@ const AISkinScanner = () => {
                   <div className="flex gap-3">
                     <button
                       onClick={resetScanner}
-                      className="flex-1 inline-flex items-center justify-center px-4 py-2 border border-green-600 text-green-600 rounded-md hover:bg-green-50"
+                      className="flex-1 inline-flex items-center justify-center px-4 py-2 border border-primary/40 text-primary font-medium rounded-md hover:bg-primary/10 transition-all shadow-sm"
                     >
                       New Scan
                     </button>

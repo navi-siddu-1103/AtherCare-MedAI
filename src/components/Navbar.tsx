@@ -20,15 +20,15 @@ const Navbar = ({ isLoggedIn = false, onLogout }: NavbarProps) => {
   };
 
   return (
-    <nav className="bg-background/95 backdrop-blur-sm border-b border-medical-border sticky top-0 z-50">
+    <nav className="bg-background/80 backdrop-blur-md border-b border-border/80 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 group">
-            <div className="p-2 bg-gradient-medical rounded-lg group-hover:shadow-medical transition-all duration-300">
-              <Heart className="h-6 w-6 text-primary-foreground" />
+          <Link to="/" className="flex items-center space-x-2.5 group">
+            <div className="p-2 bg-gradient-medical rounded-xl shadow-medical group-hover:scale-105 transition-all duration-300">
+              <Heart className="h-5 w-5 text-white" />
             </div>
-            <span className="text-xl font-bold text-foreground">MediConnect AI</span>
+            <span className="text-xl font-bold bg-gradient-medical bg-clip-text text-transparent tracking-wide">AtherCare MedAI</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -63,7 +63,7 @@ const Navbar = ({ isLoggedIn = false, onLogout }: NavbarProps) => {
                 <Button 
                   variant="outline" 
                   onClick={() => navigate('/signup')}
-                  className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                  className="border-primary/40 text-primary hover:bg-primary/10 hover:border-primary"
                 >
                   Create Account
                 </Button>
@@ -132,7 +132,7 @@ const Navbar = ({ isLoggedIn = false, onLogout }: NavbarProps) => {
                       navigate('/signup');
                       setIsMenuOpen(false);
                     }}
-                    className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                    className="border-primary/40 text-primary hover:bg-primary/10 hover:border-primary"
                   >
                     Create Account
                   </Button>

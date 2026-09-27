@@ -28,16 +28,16 @@ const Index = () => {
         <div className="text-center">
           <div className="flex justify-center mb-8">
             <div className="p-4 bg-gradient-medical rounded-2xl shadow-medical">
-              <Heart className="h-12 w-12 text-primary-foreground" />
+              <Heart className="h-12 w-12 text-white" />
             </div>
           </div>
           
           <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
-            Welcome to <span className="bg-gradient-medical bg-clip-text text-transparent">MediConnect AI</span>
+            Welcome to <span className="bg-gradient-medical bg-clip-text text-transparent">AtherCare MedAI</span>
           </h1>
           
           <p className="text-xl text-muted-foreground mb-8 max-w-4xl mx-auto">
-            MediConnect AI is a unified healthcare platform that helps users instantly locate nearby hospitals, 
+            AtherCare MedAI is a unified healthcare platform that helps users instantly locate nearby hospitals, 
             upload skin images for AI-powered disease detection, analyze blood reports with intelligent explanations, 
             and get real-time answers through a chatbot. It simplifies healthcare access, empowers patients with 
             clear insights, and accelerates the path to treatment.
@@ -71,15 +71,15 @@ const Index = () => {
           <div className="mt-24">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-bold text-foreground mb-4">
-                Why MediConnect AI?
+                Why AtherCare MedAI?
               </h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="text-center p-6 rounded-lg bg-gradient-card border border-medical-border shadow-card-medical">
+              <div className="text-center p-6 rounded-xl bg-gradient-card border border-medical-border shadow-card-medical backdrop-blur-md hover:border-primary/40 transition-all duration-300">
                 <div className="flex justify-center mb-4">
-                  <div className="p-3 bg-gradient-medical rounded-full">
-                    <Brain className="h-8 w-8 text-primary-foreground" />
+                  <div className="p-3 bg-gradient-medical rounded-full shadow-medical">
+                    <Brain className="h-8 w-8 text-white" />
                   </div>
                 </div>
                 <h3 className="text-xl font-semibold text-foreground mb-3">AI-Driven Insights</h3>
@@ -88,10 +88,10 @@ const Index = () => {
                 </p>
               </div>
 
-              <div className="text-center p-6 rounded-lg bg-gradient-card border border-medical-border shadow-card-medical">
+              <div className="text-center p-6 rounded-xl bg-gradient-card border border-medical-border shadow-card-medical backdrop-blur-md hover:border-primary/40 transition-all duration-300">
                 <div className="flex justify-center mb-4">
-                  <div className="p-3 bg-gradient-medical rounded-full">
-                    <Heart className="h-8 w-8 text-primary-foreground" />
+                  <div className="p-3 bg-gradient-medical rounded-full shadow-medical">
+                    <Heart className="h-8 w-8 text-white" />
                   </div>
                 </div>
                 <h3 className="text-xl font-semibold text-foreground mb-3">Real-Time Monitoring</h3>
@@ -100,10 +100,10 @@ const Index = () => {
                 </p>
               </div>
 
-              <div className="text-center p-6 rounded-lg bg-gradient-card border border-medical-border shadow-card-medical">
+              <div className="text-center p-6 rounded-xl bg-gradient-card border border-medical-border shadow-card-medical backdrop-blur-md hover:border-primary/40 transition-all duration-300">
                 <div className="flex justify-center mb-4">
-                  <div className="p-3 bg-gradient-medical rounded-full">
-                    <Users className="h-8 w-8 text-primary-foreground" />
+                  <div className="p-3 bg-gradient-medical rounded-full shadow-medical">
+                    <Users className="h-8 w-8 text-white" />
                   </div>
                 </div>
                 <h3 className="text-xl font-semibold text-foreground mb-3">Seamless Integration</h3>

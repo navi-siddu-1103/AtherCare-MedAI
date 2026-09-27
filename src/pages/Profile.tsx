@@ -31,24 +31,26 @@ const Profile = () => {
     <div className="min-h-screen bg-gradient-hero">
       <Navbar />
       <div className="flex items-center justify-center py-12 px-4">
-        <Card className="w-full max-w-md shadow-card-medical border-medical-border bg-gradient-card">
+        <Card className="w-full max-w-md shadow-card-medical border-medical-border bg-gradient-card backdrop-blur-md">
           <CardHeader>
-            <CardTitle className="text-center text-2xl font-bold">My Profile</CardTitle>
+            <CardTitle className="text-center text-2xl font-bold bg-gradient-medical bg-clip-text text-transparent">
+              My Profile
+            </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-background/40 border border-medical-border">
               <User className="w-5 h-5 text-primary" />
-              <span className="font-semibold">{userName}</span>
+              <span className="font-semibold text-foreground">{userName || "User"}</span>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-background/40 border border-medical-border">
               <Mail className="w-5 h-5 text-primary" />
-              <span>{userEmail}</span>
+              <span className="text-muted-foreground">{userEmail || "user@example.com"}</span>
             </div>
             <button 
               onClick={handleLogout} 
-              className="w-full mt-6 bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition-colors"
+              className="w-full mt-6 bg-gradient-to-r from-rose-500 to-red-600 text-white font-medium py-2.5 px-4 rounded-lg hover:from-rose-600 hover:to-red-700 transition-all shadow-md"
             >
-              Logout
+              Sign Out
             </button>
           </CardContent>
         </Card>

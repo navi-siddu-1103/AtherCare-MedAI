@@ -156,14 +156,14 @@ const FeaturePage = () => {
           Back to Dashboard
         </Button>
 
-        <Card className="bg-gradient-card border-medical-border shadow-card-medical">
+        <Card className="bg-gradient-card border-medical-border shadow-card-medical backdrop-blur-md">
           <CardHeader className="text-center pb-6">
             <div className="flex justify-center mb-4">
               <div className="p-4 bg-gradient-medical rounded-2xl shadow-medical">
-                <Icon className="h-12 w-12 text-primary-foreground" />
+                <Icon className="h-12 w-12 text-white" />
               </div>
             </div>
-            <CardTitle className="text-3xl font-bold text-foreground">
+            <CardTitle className="text-3xl font-bold bg-gradient-medical bg-clip-text text-transparent">
               {currentFeature.title}
             </CardTitle>
             <CardDescription className="text-lg">
@@ -185,7 +185,7 @@ const FeaturePage = () => {
                 {currentFeature.features.map((feature, index) => (
                   <div 
                     key={index}
-                    className="flex items-center p-4 bg-accent/30 rounded-lg border border-medical-border"
+                    className="flex items-center p-4 bg-background/50 rounded-lg border border-medical-border"
                   >
                     <div className="w-2 h-2 bg-gradient-medical rounded-full mr-3"></div>
                     <span className="text-foreground">{feature}</span>
@@ -198,14 +198,14 @@ const FeaturePage = () => {
               <Button 
                 variant="medical" 
                 size="lg"
-                className="flex-1 shadow-medical hover:shadow-hover-medical"
+                className="flex-1 shadow-medical hover:shadow-hover-medical text-white font-medium"
               >
                 Get Started
               </Button>
               <Button 
                 variant="outline" 
                 size="lg"
-                className="flex-1 border-medical-border hover:bg-accent/50"
+                className="flex-1 border-primary/40 text-primary hover:bg-primary/10 hover:border-primary"
               >
                 Learn More
               </Button>
