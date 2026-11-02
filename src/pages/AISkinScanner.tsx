@@ -60,9 +60,11 @@ const AISkinScanner = () => {
         method: "POST",
         body: formData
       });
-      const data: PredictionResponse = await response.json();
+      const data: PredictionResponse = await response.json().catch(() => ({}));
 
-      if (data.error) {
+      if (!response.ok) {
+        alert(data.error || `Backend request failed (${response.status}).`);
+      } else if (data.error) {
         alert(data.error);
       } else if (data.prediction) {
         setPrediction(data.prediction);
