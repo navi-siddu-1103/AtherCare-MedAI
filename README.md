@@ -202,6 +202,15 @@ python app.py
 
 The backend API will be available at **http://localhost:8000**
 
+### Deploying the backend
+
+The frontend is deployed separately from the Flask API. This repository includes
+`render.yaml` for deploying the backend to Render. After the Render service is
+created, set the Vercel project environment variable `VITE_API_URL` to the
+service URL (for example, `https://athercare-medai-api.onrender.com`) and
+redeploy the frontend. Without this variable, a production build attempts to
+call the developer's local `127.0.0.1:8000` address.
+
 ---
 
 ## 🔌 API Endpoints
